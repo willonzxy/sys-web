@@ -2,12 +2,13 @@
  * @Author: 伟龙-Willon qq:1061258787 
  * @Date: 2019-03-18 17:07:55 
  * @Last Modified by: 伟龙-Willon
- * @Last Modified time: 2019-03-19 13:28:23
+ * @Last Modified time: 2019-03-19 17:11:10
  */
 import React from 'react';
 import {
     Form, Icon, Input, Button, Checkbox,
 } from 'antd';
+import { Link } from 'react-router-dom'
 import './index.css';
 
 class NormalLoginForm extends React.Component {
@@ -24,37 +25,40 @@ class NormalLoginForm extends React.Component {
     render() {
         const { getFieldDecorator } = this.props.form;
         return (
-        <div className="login-box">
-            <div className="platform-name">IOT<sup>TM</sup></div>
-            <Form onSubmit={this.handleSubmit} className="login-form">
-                <Form.Item>
-                    {getFieldDecorator('userName', {
-                        rules: [{ required: true, message: 'Please input your username!' }],
-                    })(
-                        <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
-                    )}
-                </Form.Item>
-                <Form.Item>
-                    {getFieldDecorator('password', {
-                        rules: [{ required: true, message: 'Please input your Password!' }],
-                    })(
-                        <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
-                    )}
-                </Form.Item>
-                <Form.Item>
-                    {getFieldDecorator('remember', {
-                        valuePropName: 'checked',
-                        initialValue: true,
-                    })(
-                        <Checkbox>Remember me</Checkbox>
-                    )}
-                    <a className="login-form-forgot" href="">Forgot password</a>
-                    <Button type="primary" htmlType="submit" className="login-form-button">
-                        Log in
-                    </Button>
-                    Or <a href="">register now!</a>
-                </Form.Item>
-            </Form>
+        <div>
+            <video className="video" src="https://mdn.alipayobjects.com/afts/file/A*grJPTKqmP9QAAAAAAAAAAABjAQAAAQ?bz=antv_site" autoPlay loop/>
+            <div className="login-box">
+                <div className="platform-name">IOT<sup>TM</sup></div>
+                <Form onSubmit={this.handleSubmit} className="login-form">
+                    <Form.Item>
+                        {getFieldDecorator('userName', {
+                            rules: [{ required: true, message: 'Please input your username!' }],
+                        })(
+                            <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
+                        )}
+                    </Form.Item>
+                    <Form.Item>
+                        {getFieldDecorator('password', {
+                            rules: [{ required: true, message: 'Please input your Password!' }],
+                        })(
+                            <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
+                        )}
+                    </Form.Item>
+                    <Form.Item>
+                        {getFieldDecorator('remember', {
+                            valuePropName: 'checked',
+                            initialValue: true,
+                        })(
+                            <Checkbox>Remember me</Checkbox>
+                        )}
+                        <a className="login-form-forgot" href="">Forgot password</a>
+                        <Button type="primary" htmlType="submit" className="login-form-button">
+                            Log in
+                        </Button>
+                        Or <Link to="/register">register now!</Link>
+                    </Form.Item>
+                </Form>
+            </div>
         </div>
         );
     }
