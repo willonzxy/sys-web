@@ -1,0 +1,39 @@
+::-webkit-scrollbar{
+    display:none;
+}
+body{
+    position: relative;
+}
+#root{
+    height: 100%;
+}
+.login-box {
+    position: absolute;
+    top:50%;
+    left:50%;
+   /*  margin: 50vh auto 0; */
+    transform: translate(-50%,-50%);
+}
+.platform-name {
+    font-size:60px;
+    text-align: center;
+    font-weight: 100;
+    letter-spacing: 5px;
+}
+.platform-name sup{
+    font-size: 10px;
+    letter-spacing: initial;
+    top:-3.5em;
+}
+.login-box .ant-form{
+    margin: auto;
+}
+.login-box .login-form {
+    max-width: 300px;
+}
+.login-box .login-form-forgot {
+    float: right;
+}
+.login-box .login-form-button {
+    width: 100%;
+}

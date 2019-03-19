@@ -1,0 +1,32 @@
+.area-item-box{
+    display: flex;
+    flex-wrap: wrap;
+}
+.area-item-box .ant-card{
+    margin:5px;
+    cursor: pointer;
+}
+/* .area-item-box .item{
+    box-sizing: border-box;
+    flex: 1;
+    padding: 25px 15px;
+    border-radius: 5px;
+    margin: 5px;
+    max-width: 250px;
+    color:#fff;
+    font-size:20px;
+    letter-spacing: 5px;
+    text-align: center;
+    background: #009EFB;
+    transition: all .3s;
+    box-shadow: 0 2px 8px rgba(84, 48, 132, 0.1);
+}
+.area-item-box .item:hover{
+    cursor: pointer;
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(84, 48, 132, 0.06);
+}
+
+.gap{
+    margin: 10px;
+} */

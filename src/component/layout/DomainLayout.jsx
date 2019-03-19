@@ -2,7 +2,7 @@
  * @Author: 伟龙-Willon qq:1061258787 
  * @Date: 2019-03-18 14:41:51 
  * @Last Modified by: 伟龙-Willon
- * @Last Modified time: 2019-03-18 20:09:22
+ * @Last Modified time: 2019-03-19 14:21:36
  */
 import React from 'react'
 import {Layout, Menu, Icon,} from 'antd'
@@ -41,8 +41,8 @@ class DomainLayout extends React.Component {
                         key="sub1"
                         title={<span><Icon type="user" /><span>区域管理</span></span>}
                     >
-                        <Menu.Item key="3"><Link to="/domain/area">test</Link></Menu.Item>
-                        <Menu.Item key="4">数据监察</Menu.Item>
+                        <Menu.Item key="1"><Link to="/domain/area">数据监控</Link></Menu.Item>
+                        <Menu.Item key="2"><Link to="/domain/area">新增区域配置</Link></Menu.Item>
                     </SubMenu>
                     {/* <Menu.Item key="1">
                         <Icon type="pie-chart" />
