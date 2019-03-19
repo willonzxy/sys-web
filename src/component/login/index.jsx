@@ -2,7 +2,7 @@
  * @Author: 伟龙-Willon qq:1061258787 
  * @Date: 2019-03-18 17:07:55 
  * @Last Modified by: 伟龙-Willon
- * @Last Modified time: 2019-03-19 17:11:10
+ * @Last Modified time: 2019-03-19 20:53:28
  */
 import React from 'react';
 import {
@@ -26,7 +26,7 @@ class NormalLoginForm extends React.Component {
         const { getFieldDecorator } = this.props.form;
         return (
         <div>
-            <video className="video" src="https://mdn.alipayobjects.com/afts/file/A*grJPTKqmP9QAAAAAAAAAAABjAQAAAQ?bz=antv_site" autoPlay loop/>
+            <video className="video" src="/index.mp4" autoPlay loop/>
             <div className="login-box">
                 <div className="platform-name">IOT<sup>TM</sup></div>
                 <Form onSubmit={this.handleSubmit} className="login-form">
@@ -59,6 +59,7 @@ class NormalLoginForm extends React.Component {
                     </Form.Item>
                 </Form>
             </div>
+            <footer className="footer">IOT System ©2019 Created by Willon</footer>
         </div>
         );
     }

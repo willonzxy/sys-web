@@ -16,7 +16,7 @@ body{
     display: flex;
     justify-content: space-around;
     align-items: center;
-    animation: slider .4s ease-in-out;
+    animation: slider .6s ease-in-out;
 }
 .register-box .platform-name{
     color: #333;
@@ -27,6 +27,22 @@ body{
     /* height: inherit;
     background:linear-gradient(to right,#9da8b1,#dddf68) */
 }
+.left-side{
+    text-align: right;
+    letter-spacing: 5px;
+}
+.bg .bar{
+    position: absolute;
+    top:-70px;
+    right:0px;
+    transform: rotate(-45deg);
+    width:31px;
+    height: 350px;
+    padding: 89px 9px;
+    color: #fff;
+    background: #3AA2FB;
+}
+
 .video{
     display: block;
     width: 100%;
@@ -35,10 +51,11 @@ body{
     object-fit:fill;
 }
 .input-group{
-    width:550px;
+    width:500px;
+    margin-left:50px;
 }
-
-.footer{
+ 
+.bg .footer{
     position: absolute;
     bottom: 0px;
     left: 0px;
@@ -48,6 +65,7 @@ body{
     background: #f0f0f0;
     color:rgba(0, 0, 0,.4);
 }
+
 .container {
     float: left;
     display: grid;
@@ -97,7 +115,7 @@ body{
 
 @keyframes slider {
     0%{
-        left:35%;
+        left:20%;
     }
     100%{
         left:50%;

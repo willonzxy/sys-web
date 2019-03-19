@@ -2,13 +2,13 @@
  * @Author: 伟龙-Willon qq:1061258787 
  * @Date: 2019-03-19 15:34:54 
  * @Last Modified by: 伟龙-Willon
- * @Last Modified time: 2019-03-19 20:17:44
+ * @Last Modified time: 2019-03-19 21:43:47
  */
 import React from 'react';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import './index.css';
 import {
-    Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Button, AutoComplete,
+    Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Button, AutoComplete, Upload,
   } from 'antd';
   
   const { Option } = Select;
@@ -43,7 +43,15 @@ import {
       confirmDirty: false,
       autoCompleteResult: [],
     };
-  
+    
+    normFile = (e) => {
+      console.log('Upload event:', e);
+      if (Array.isArray(e)) {
+        return e;
+      }
+      return e && e.fileList;
+    }
+
     handleSubmit = (e) => {
       e.preventDefault();
       this.props.form.validateFieldsAndScroll((err, values) => {
@@ -126,36 +134,52 @@ import {
   
       return (
         <div className="bg">
+            <Link to="/"><div className="bar">登录</div></Link>
             <div className="register-box">
-              <div className="container">
-                <div className="item-a"></div>
-                <div className="item-b"></div>
-                <div className="item-c"></div>
-                <div className="item-d"></div>
-                <div className="item-e"></div>
+              <div className="left-side">
+                <h1>注册使用</h1>
+                <div className="container">
+                  <div className="item-a"></div>
+                  <div className="item-b"></div>
+                  <div className="item-c"></div>
+                  <div className="item-d"></div>
+                  <div className="item-e"></div>
+                </div>
               </div>
               <div className="input-group">
-                <div className="platform-name"><Link to="/">IOT</Link><sup>TM</sup></div>
+                <div className="platform-name">IOT<sup>TM</sup></div>
                 <Form {...formItemLayout} onSubmit={this.handleSubmit}>
                   <Form.Item
-                    label="E-mail"
+                    label="负责人电话"
                   >
-                    {getFieldDecorator('email', {
-                      rules: [{
-                        type: 'email', message: 'The input is not valid E-mail!',
-                      }, {
-                        required: true, message: 'Please input your E-mail!',
-                      }],
+                    {getFieldDecorator('tel', {
+                      rules: [{ required: true, message: '填入联系人电话!' }],
+                    })(
+                      <Input addonBefore={prefixSelector} style={{ width: '100%' }} />
+                    )}
+                  </Form.Item>
+                  <Form.Item
+                    label={(
+                      <span>
+                        公司负责人&nbsp;
+                        <Tooltip title="填入公司负责人">
+                          <Icon type="question-circle-o" />
+                        </Tooltip>
+                      </span>
+                    )}
+                  >
+                    {getFieldDecorator('leader', {
+                      rules: [{ required: true, message: '公司负责人名称!', whitespace: true }],
                     })(
                       <Input />
                     )}
                   </Form.Item>
                   <Form.Item
-                    label="Password"
+                    label="密码"
                   >
                     {getFieldDecorator('password', {
                       rules: [{
-                        required: true, message: 'Please input your password!',
+                        required: true, message: '填入密码!',
                       }, {
                         validator: this.validateToNextPassword,
                       }],
@@ -164,11 +188,11 @@ import {
                     )}
                   </Form.Item>
                   <Form.Item
-                    label="Confirm Password"
+                    label="确认密码"
                   >
                     {getFieldDecorator('confirm', {
                       rules: [{
-                        required: true, message: 'Please confirm your password!',
+                        required: true, message: '请确认好密码!',
                       }, {
                         validator: this.compareToFirstPassword,
                       }],
@@ -177,77 +201,42 @@ import {
                     )}
                   </Form.Item>
                   <Form.Item
-                    label={(
-                      <span>
-                        Nickname&nbsp;
-                        <Tooltip title="What do you want others to call you?">
-                          <Icon type="question-circle-o" />
-                        </Tooltip>
-                      </span>
-                    )}
+                    label="公司名称"
                   >
-                    {getFieldDecorator('nickname', {
-                      rules: [{ required: true, message: 'Please input your nickname!', whitespace: true }],
+                    {getFieldDecorator('company_name', {
+                      rules: [{
+                        required: true, message: '填入公司名称',
+                      }],
                     })(
                       <Input />
                     )}
                   </Form.Item>
                   <Form.Item
-                    label="Habitual Residence"
+                    label="公司地址"
                   >
-                    {getFieldDecorator('residence', {
-                      initialValue: ['zhejiang', 'hangzhou', 'xihu'],
-                      rules: [{ type: 'array', required: true, message: 'Please select your habitual residence!' }],
+                    {getFieldDecorator('site', {
+                      rules: [{
+                        required: true, message: '填入公司地址',
+                      }],
                     })(
-                      <Cascader options={residences} />
+                      <Input />
                     )}
                   </Form.Item>
                   <Form.Item
-                    label="Phone Number"
+                    label="工商执照"
                   >
-                    {getFieldDecorator('phone', {
-                      rules: [{ required: true, message: 'Please input your phone number!' }],
+                    {getFieldDecorator('file', {
+                      valuePropName: 'fileList',
+                      getValueFromEvent: this.normFile,
+                      rules: [{
+                        required: true, message: '上传工商执照',
+                      }]
                     })(
-                      <Input addonBefore={prefixSelector} style={{ width: '100%' }} />
-                    )}
-                  </Form.Item>
-                  <Form.Item
-                    label="Website"
-                  >
-                    {getFieldDecorator('website', {
-                      rules: [{ required: true, message: 'Please input website!' }],
-                    })(
-                      <AutoComplete
-                        dataSource={websiteOptions}
-                        onChange={this.handleWebsiteChange}
-                        placeholder="website"
-                      >
-                        <Input />
-                      </AutoComplete>
-                    )}
-                  </Form.Item>
-                  <Form.Item
-                    label="Captcha"
-                    extra="We must make sure that your are a human."
-                  >
-                    <Row gutter={8}>
-                      <Col span={12}>
-                        {getFieldDecorator('captcha', {
-                          rules: [{ required: true, message: 'Please input the captcha you got!' }],
-                        })(
-                          <Input />
-                        )}
-                      </Col>
-                      <Col span={12}>
-                        <Button>Get captcha</Button>
-                      </Col>
-                    </Row>
-                  </Form.Item>
-                  <Form.Item {...tailFormItemLayout}>
-                    {getFieldDecorator('agreement', {
-                      valuePropName: 'checked',
-                    })(
-                      <Checkbox>I have read the <a href="">agreement</a></Checkbox>
+                      <Upload name="logo" action="/upload.do" listType="picture">
+                        <Button>
+                          <Icon type="upload" /> Click to upload
+                        </Button>
+                      </Upload>
                     )}
                   </Form.Item>
                   <Form.Item {...tailFormItemLayout}>
