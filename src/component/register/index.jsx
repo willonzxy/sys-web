@@ -2,16 +2,17 @@
  * @Author: 伟龙-Willon qq:1061258787 
  * @Date: 2019-03-19 15:34:54 
  * @Last Modified by: 伟龙-Willon
- * @Last Modified time: 2019-03-20 15:33:35
+ * @Last Modified time: 2019-03-29 14:10:39
  */
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './index.css';
 import {
-    Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Button, AutoComplete, Upload,
+    Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Button, AutoComplete, Upload,message
 } from 'antd';
 import API from '../api.js';
-const { upload } = API;
+import qs from 'querystring'
+const { upload,register } = API;
 const { Option } = Select;
 const AutoCompleteOption = AutoComplete.Option;
 
@@ -42,23 +43,42 @@ const residences = [{
 class RegistrationForm extends React.Component {
   state = {
     confirmDirty: false,
-    autoCompleteResult: [],
+    autoCompleteResult: []
   };
   
-  normFile = (e) => {
+/*   normFile = (e) => {
     console.log('Upload event:', e);
     if (Array.isArray(e)) {
       return e;
     }
     return e && e.fileList;
-  }
+  } */
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.form.validateFieldsAndScroll((err, values) => {
+    this.props.form.validateFieldsAndScroll((err, {confirm,prefix,...data}) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+        if(data.licence.file.response.status === 1){
+          data.licence = data.licence.file.response.path
+          console.log(data)
+          let { signIn:{url,method} } = register;
+          fetch(url,{method,body:qs.stringify(data),headers:{'content-type':'application/x-www-form-urlencoded'}})
+          .then(res=>{
+            console.log(res)
+            return res
+          })
+          .then(res=>res.json())
+          .then(res=>{
+            console.log(res)
+            if(res.status === 1){
+              message.success('注册成功')
+              return
+            }
+          })
+          return
+        }
       }
+      message.error('注册失败！请按照提示填入');
     });
   }
 
@@ -228,9 +248,9 @@ class RegistrationForm extends React.Component {
                     </Tooltip>
                     </span>)}
                 >
-                  {getFieldDecorator('file', {
-                    valuePropName: 'fileList',
-                    getValueFromEvent: this.normFile,
+                  {getFieldDecorator('licence', {
+                   /*  valuePropName: 'fileList', */
+                    /* getValueFromEvent: this.normFile, */
                     rules: [{
                       required: true, message: '上传工商执照',
                     }]

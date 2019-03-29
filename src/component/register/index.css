@@ -16,7 +16,7 @@ body{
     display: flex;
     justify-content: space-around;
     align-items: center;
-    animation: slider .6s ease-in-out;
+    animation: slider .5s ease-in-out;
 }
 .register-box .platform-name{
     color: #333;
@@ -115,10 +115,10 @@ body{
 
 @keyframes slider {
     0%{
-        left:20%;
+        transform: translate(-100%,-50%)
     }
     100%{
-        left:50%;
+        transform: translate(-50%,-50%)
     }
 }
 /* .register-box .ant-form-item-label > label{
