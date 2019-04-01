@@ -2,7 +2,7 @@
  * @Author: 伟龙-Willon qq:1061258787 
  * @Date: 2019-03-19 15:34:54 
  * @Last Modified by: 伟龙-Willon
- * @Last Modified time: 2019-03-29 14:10:39
+ * @Last Modified time: 2019-04-01 15:11:02
  */
 import React from 'react';
 import { Link } from 'react-router-dom';
@@ -11,41 +11,20 @@ import {
     Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Button, AutoComplete, Upload,message
 } from 'antd';
 import API from '../api.js';
-import qs from 'querystring'
+import md5 from 'md5'
 const { upload,register } = API;
 const { Option } = Select;
 const AutoCompleteOption = AutoComplete.Option;
 
-const residences = [{
-  value: 'zhejiang',
-  label: 'Zhejiang',
-  children: [{
-    value: 'hangzhou',
-    label: 'Hangzhou',
-    children: [{
-      value: 'xihu',
-      label: 'West Lake',
-    }],
-  }],
-}, {
-  value: 'jiangsu',
-  label: 'Jiangsu',
-  children: [{
-    value: 'nanjing',
-    label: 'Nanjing',
-    children: [{
-      value: 'zhonghuamen',
-      label: 'Zhong Hua Men',
-    }],
-  }],
-}];
-
 class RegistrationForm extends React.Component {
+  constructor(){
+    super(...arguments)
+  }
   state = {
     confirmDirty: false,
     autoCompleteResult: []
   };
-  
+
 /*   normFile = (e) => {
     console.log('Upload event:', e);
     if (Array.isArray(e)) {
@@ -60,18 +39,25 @@ class RegistrationForm extends React.Component {
       if (!err) {
         if(data.licence.file.response.status === 1){
           data.licence = data.licence.file.response.path
-          console.log(data)
-          let { signIn:{url,method} } = register;
-          fetch(url,{method,body:qs.stringify(data),headers:{'content-type':'application/x-www-form-urlencoded'}})
-          .then(res=>{
-            console.log(res)
-            return res
-          })
+          data.password = md5(data.password)
+          let { signIn:{path:url,method} } = register;
+          fetch(url,{
+            method,
+            body:JSON.stringify(data),
+            headers: {
+            'Content-Type': 'application/json'
+          }})
           .then(res=>res.json())
           .then(res=>{
             console.log(res)
             if(res.status === 1){
               message.success('注册成功')
+              this.props.history.push({
+                pathname:'/',
+                params:{
+                  tel:data.tel
+                }
+              })
               return
             }
           })
