@@ -6,6 +6,26 @@
     margin:5px;
     cursor: pointer;
 }
+.area .ant-input-affix-wrapper {
+    width:200px;
+}
+.area .gap-l {
+    margin-left: 10px;
+}
+.area .gap-t{
+    margin-top: 10px;
+}
+.area .ant-form-item-label{
+    text-align: right;
+}
+.ant-btn-danger {
+    background-color:#fff !important;
+}
+.ant-btn-danger:hover{
+    background-color: #f5222d !important;
+    color:#fff !important;
+}
+
 /* .area-item-box .item{
     box-sizing: border-box;
     flex: 1;

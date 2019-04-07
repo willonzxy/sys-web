@@ -1,8 +1,8 @@
 /*
  * @Author: 伟龙-Willon qq:1061258787 
  * @Date: 2019-03-19 10:51:36 
- * @Last Modified by: 伟龙-Willon
- * @Last Modified time: 2019-04-01 15:09:59
+ * @Last Modified by: mikey.zhaopeng
+ * @Last Modified time: 2019-04-07 15:53:15
  */
 /** 组件所用的所有api都收藏于此，统一管理 */
 const baseApi = 'http://localhost:4000',
@@ -20,6 +20,34 @@ export default {
         signIn:{
             path:'/company/register',
             method:'post',
+        }
+    },
+    warehouse:{
+        add:{
+            path:'/warehouse',
+            method:'post',
+        },
+        get:{
+            path:'/warehouse',
+            method:'get'
+        },
+        del:{
+            path:'/warehouse/:id',
+            method:'delete'
+        }
+    },
+    area:{
+        add:{
+            path:'/area',
+            method:'post'
+        },
+        get:{
+            path:'/area',
+            method:'get'
+        },
+        del:{
+            path:'/area',
+            method:'delete'
         }
     },
     upload:{

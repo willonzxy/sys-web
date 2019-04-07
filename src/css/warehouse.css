@@ -1,0 +1,15 @@
+.warehouse .search-tools {
+    display: flex;
+    justify-content:flex-start;
+    align-content: center;
+    padding: 10px 0px;
+}
+.warehouse .ant-input-affix-wrapper {
+    width:200px;
+}
+.warehouse .gap-l{
+    margin-left: 10px;
+}
+.red{
+    color:#808080
+}

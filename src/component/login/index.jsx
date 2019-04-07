@@ -1,8 +1,8 @@
 /*
  * @Author: 伟龙-Willon qq:1061258787 
  * @Date: 2019-03-18 17:07:55 
- * @Last Modified by: 伟龙-Willon
- * @Last Modified time: 2019-04-01 15:32:55
+ * @Last Modified by: mikey.zhaopeng
+ * @Last Modified time: 2019-04-07 10:23:01
  */
 import React from 'react';
 import {
@@ -25,7 +25,7 @@ class NormalLoginForm extends React.Component {
                 console.log('Received values of form: ', data);
                 let {path:url,method} = login.signOn;
                 data.password = md5(data.password);
-                fetch(`http://localhost:4000/company/login`,{method,headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
+                fetch(`/company/login`,{method,headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
                 .then(res=>res.json())
                 .then(res=>{
                     if(res.status === 1){
