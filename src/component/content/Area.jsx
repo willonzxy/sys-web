@@ -2,12 +2,12 @@
  * @Author: 伟龙-Willon qq:1061258787 
  * @Date: 2019-03-18 17:07:55 
  * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2019-04-07 16:20:31
+ * @Last Modified time: 2019-04-08 22:30:02
  */
 import React from 'react'
 import Card from '../card/index.jsx'
 import '../../css/area.css'
-import { Table,Input,Icon,Button,Drawer,Form,InputNumber,message,Select,Spin} from 'antd';
+import { Table,Input,Icon,Button,Drawer,Form,InputNumber,message,Select,Spin,Popconfirm} from 'antd';
 import API from '../api.js'
 import Uploader from '../uploader/index.jsx'
 import _fetch from '../../tool/fetch.js'
@@ -24,7 +24,7 @@ class Area extends React.PureComponent {
         super(...arguments)
     }
     state = {
-      type:'',
+      area_name:'',
       visible:false,
       fetching:false,
       dataList:[],
@@ -44,7 +44,7 @@ class Area extends React.PureComponent {
         key:'pic',
         render:(text,record)=>(
           <div>
-            <img src={record.pic}/>
+            <img src={record.pic} width="65px" height="65px" alt=''/>
           </div>
         )
       },{
@@ -68,9 +68,11 @@ class Area extends React.PureComponent {
         key: 'action',
         render: (text, record) => (
           <div>
-            <Button type="danger" onClick={this.del.bind(this,record._id)}>删除</Button>
-            <Button type="default" className="gap-l" onClick={this.gotoDetail.bind(this,record._id)}>详情</Button>
-            <Button type="dashed" className="gap-l" onClick={this.gotoDetail.bind(this,record._id)}>修改</Button>
+            <Popconfirm title="Are you sure delete this info?" onConfirm={this.del.bind(this,record._id)} okText="Yes" cancelText="No">
+              <Button type="danger">删除</Button>
+            </Popconfirm>
+            <Button type="default" className="gap-l" onClick={this.gotoDetail.bind(this,record)}>详情</Button>
+            <Button type="dashed" className="gap-l" onClick={this.gotoDetail.bind(this,record)}>修改</Button>
           </div>
         ),
       }]
@@ -81,9 +83,10 @@ class Area extends React.PureComponent {
     changeDrawerState = () => {
       this.setState(prev=>({visible:!prev.visible}))
     }
-    onTypeChange(val){
-      console.log('...')
-      console.log(val)
+    onTypeChange = (val) =>{
+      this.setState({
+        area_name:val.target.value
+      })
     }
     onSearch = (value)=>{
       console.log('fetching user', value);
@@ -106,37 +109,43 @@ class Area extends React.PureComponent {
       e.preventDefault();
       this.props.form.validateFields((err,data) => {
           if (!err) {
-              console.log('Received values of form: ', data);
-              let { path } = area.add;
-              _fetch.post(path,data)
+              let { path,method } = area.add;
+              if(!data.pic.file.response || !data.pic.file.response.path){
+                return message.error('文件上传失败')
+              }
+              data.pic = data.pic.file.response.path
+              _fetch[method](path,data)
               .then(res=>{
                 if(res.status === 1){
                   message.success('添加成功')
-                  return this.getWarehouseData()
+                  return this.getAreaData()
                 }
                 message.warn('添加失败')
               })
           }
       });
     }
-
-    gotoDetail = _id =>{
+    search = () => {
+      this.getAreaData(this.state.area_name)
+    }
+    gotoDetail = data =>{
       this.props.history.push({
-        pathname:`/domain/area/vdata/${_id}`,
+        pathname:`/domain/area/vdata/${data._id}`,
+        state:data
       })
     }
     del = _id =>{
       let { path } = area.del;
       _fetch.del(`${path}/${_id}`).then(res=>{
         if(res.status === 1){
-          return this.getWarehouseData()
+          return this.getAreaData()
         }
       })
     }
     getAreaData = val  =>{
-      let { path } = area.get;
+      let { path,method } = area.get;
       val && (path = `${path}?area_name=${val}`) 
-      _fetch.get(path)
+      _fetch[method](path)
       .then(res=>{
         if(res.status === 1){
           return this.setState({
@@ -162,11 +171,11 @@ class Area extends React.PureComponent {
                 <Input
                     placeholder="输入传感器型号"
                     prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                    value={this.state.type}
+                    value={this.state.area_name}
                     onChange={this.onTypeChange}
                     // ref={node => this.userNameInput = node}
                 />
-                <Button type="default" icon="search" className="gap-l">Search</Button>
+                <Button type="default" icon="search" className="gap-l" onClick={this.search}>Search</Button>
                 <Button type="default" icon="plus" className="gap-l" onClick={this.changeDrawerState}>新增</Button>
                 <Drawer
                     title="新增区域"
@@ -205,7 +214,7 @@ class Area extends React.PureComponent {
                         {...lay}
                       >
                         {getFieldDecorator('pic')(
-                          <Uploader name="pic" action={`${upload.path}?scene_id=area`} listType="picture">
+                          <Uploader name="pic" action={`${upload.path}?scene_id=area&attr=pic`} listType="picture">
                             <Button>
                               <Icon type="upload" /> Click to upload
                             </Button>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table,Input,Icon,Button,Drawer,Form,InputNumber,message} from 'antd';
+import { Table,Input,Icon,Button,Drawer,Form,InputNumber,message,Popconfirm} from 'antd';
 import '../../css/warehouse.css'
 import Uploader from '../uploader/index.jsx'
 import API from '../api.js'
@@ -43,7 +43,9 @@ class Warehouse extends React.PureComponent{
               title: '操作',
               key: 'action',
               render: (text, record) => (
-                <Button type="danger" onClick={this.del.bind(this,record._id)}>删除</Button>
+                <Popconfirm title="Are you sure delete this info?" onConfirm={this.del.bind(this,record._id)} okText="Yes" cancelText="No">
+                  <Button type="danger">删除</Button>
+                </Popconfirm>
               ),
             }]
         }
@@ -59,9 +61,13 @@ class Warehouse extends React.PureComponent{
         }
       })
     }
-    getWarehouseData = () => {
-      let {path } = warehouse.get
-      _fetch.get(path)
+    search = ()=>{
+      this.getWarehouseData(this.state.type)
+    }
+    getWarehouseData = (val) => {
+      let {path,method} = warehouse.get;
+      val && (path = `${path}?=type${val}`);
+      _fetch[method](path)
       .then(res=>{
         if(res.status === 1){
           return this.setState({
@@ -88,10 +94,11 @@ class Warehouse extends React.PureComponent{
               })
           }
       });
-  }
-    onTypeChange(val){
-        console.log('...')
-        console.log(val)
+    }
+    onTypeChange = e =>{
+        this.setState({
+          type:e.target.value
+        })
     }
     changeDrawerState = () => {
       this.setState(prev=>({visible:!prev.visible}))
@@ -108,7 +115,7 @@ class Warehouse extends React.PureComponent{
                         onChange={this.onTypeChange}
                         // ref={node => this.userNameInput = node}
                     />
-                    <Button type="default" icon="search" className="gap-l">Search</Button>
+                    <Button type="default" icon="search" className="gap-l" onClick={this.search}>Search</Button>
                     <Button type="default" icon="plus" className="gap-l" onClick={this.changeDrawerState}>新增</Button>
                     <Drawer
                         title="新增物料"

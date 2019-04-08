@@ -2,7 +2,7 @@
  * @Author: 伟龙-Willon qq:1061258787 
  * @Date: 2019-03-18 14:41:51 
  * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2019-04-06 22:33:32
+ * @Last Modified time: 2019-04-08 20:12:27
  */
 import React from 'react'
 import {Layout, Menu, Icon,} from 'antd'
@@ -36,16 +36,17 @@ class DomainLayout extends React.Component {
                 onCollapse={this.onCollapse}
             >
                 <div className="domain-logo" ><h1>IOT</h1></div>
-                <Menu theme="dark" defaultSelectedKeys={['1']}  defaultOpenKeys={['sub1']} mode="inline">
+                <Menu theme="dark" defaultSelectedKeys={['1']}  defaultOpenKeys={['1']} mode="inline">
                     {/* <SubMenu
                         key="sub1"
-                        title={<span><Icon type="pie-chart" /><span>区域管理</span></span>}
+                        title={<span><Icon type="line-chart" /><span>数据监控</span></span>}
                     >
-                        <Menu.Item key="1"><Link to="/domain/area">数据监控</Link></Menu.Item>
-                        <Menu.Item key="2"><Link to="/domain/area">新增区域配置</Link></Menu.Item>
+                        <Menu.Item key="1"><Link to="/domain/area">大盘监控</Link></Menu.Item>
+                        <Menu.Item key="2"><Link to="/domain/area">区域管理</Link></Menu.Item>
+
                     </SubMenu> */}
                     <Menu.Item key="1">
-                        <Link to="/domain/area"><Icon type="line-chart" />区域管理</Link>
+                        <Link to="/domain/area"><Icon type="line-chart" />区域监控</Link>
                     </Menu.Item>
                     <Menu.Item key="2">
                         <Link to="/domain/warehouse"><Icon type="pie-chart" />仓储管理</Link>

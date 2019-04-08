@@ -14,6 +14,7 @@
 }
 .sensor-item h3{
     color: #fff;
+    margin: 0px;
 }
 .font-35px{
     font-size: 35px;
@@ -27,6 +28,6 @@
 .sensor-list-box .gap-r{
     margin-right: 10px;
 }
-.sensor-list-box .gap-t{
-    margin-top: 10px;
+.vdata .gap-t{
+    margin-top: 20px;
 }
