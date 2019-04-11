@@ -6,33 +6,6 @@ import qs from 'querystring'
 import dateFormat from 'dateformat'
 const {TextArea} = Input;
 
-function makeComponent(type,config){
-    switch(type){
-        case 'input': var { placeholder='insert here',icon='tag',style } = config; return ()=>(
-            <Input
-                placeholder={placeholder} 
-                prefix={<Icon type={icon} style={style} />}
-            />
-        );
-        case 'uploader':var {attr,uploadApi,placeholder="click here upload",scene_id} = config; return ()=>(
-            <Uploader name={attr} action={`${uploadApi}?scene_id=${scene_id}`} listType="picture">
-                <Button>
-                    <Icon type="upload" /> {placeholder}
-                </Button>
-            </Uploader>
-        );
-        case 'textarea': var {rows} = config;return ()=>(
-            <TextArea rows={rows} />
-        );
-        case 'number' :  var {min=0 ,max} = config; return ()=>(
-            <InputNumber min={min} max={max}  />
-        );
-        case 'submit' : var {htmlType='submit',label='提交'} = config; return ()=>(
-            <Button type="primary" htmlType={htmlType}>{label}</Button>
-        );
-        default:return ()=><div>no this component</div>
-    }
-}
 const lay = {
     labelCol: { span: 8 },
     wrapperCol: { span: 14 },
@@ -41,6 +14,31 @@ class DOM extends React.Component{
     constructor(){
         super(...arguments);
         let { cols,api,searchForm,addForm,DrawerName } = this.props;
+        cols.forEach(item => {
+            if(item.key === 'action'){
+                let {actions} = item;
+                item.render = (text,record)=>{
+                    return (<div>
+                        {
+                            actions.map(item=>{
+                                switch(item){
+                                    case 'd':return (
+                                            <Popconfirm title="Are you sure delete this info?" onConfirm={this.del.bind(this,record._id)} okText="Yes" cancelText="No">
+                                                <Button type="danger">删除</Button>
+                                            </Popconfirm>
+                                    );
+                                    case 'u':return (
+                                        <Button type="dash" >修改</Button>
+                                    );
+                                    default:return (<div>don't have this component</div>)
+                                }
+                                
+                            })
+                        }
+                    </div>)
+                }
+            }
+        });
         this.state = {
             searchFormData:{}, 
             visible:false,
@@ -155,7 +153,6 @@ class DOM extends React.Component{
                     {
                         addForm.map(item=>{
                             var {attr='',initialValue="",rules,type,label} = item;
-                            var Sub = makeComponent(type,item);
                             if(type === "submit"){
                                 return (
                                     <Form.Item 

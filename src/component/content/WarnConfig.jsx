@@ -37,15 +37,15 @@ const columns = [{
   },{
     title: '操作',
     key: 'action',
-    render: function(text, record){
-      return (
-        <Popconfirm title="Are you sure delete this info?" onConfirm={this.del.bind(this,record._id)} okText="Yes" cancelText="No">
-          <Button type="danger">删除</Button>
-        </Popconfirm>
-      )
-    }
+    actions:['d','u'],
+    // render: function(text, record){
+    //   return (
+    //     <Popconfirm title="Are you sure delete this info?" onConfirm={this.del.bind(this,record._id)} okText="Yes" cancelText="No">
+    //       <Button type="danger">删除</Button>
+    //     </Popconfirm>
+    //   )
+    // }
   }];
-  
 const addForm = [
   {
     attr:'name',
