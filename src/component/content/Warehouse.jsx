@@ -22,8 +22,8 @@ class Warehouse extends React.PureComponent{
             dataSource:[],
             columns:[{
               title: '类型',
-              dataIndex: 'type',
-              key: 'type'
+              dataIndex: 'name',
+              key: 'name'
             }, {
               title: '库存',
               dataIndex: 'inventory',
@@ -130,9 +130,9 @@ class Warehouse extends React.PureComponent{
                             label="类型"
                             {...lay}
                           >
-                              {getFieldDecorator('type', {
+                              {getFieldDecorator('name', {
                                   initialValue:"lucy",
-                                  rules: [{ required: true, message: 'Please select type!' }],
+                                  rules: [{ required: true, message: 'Please select name!' }],
                               })(
                                 <Input placeholder="类型" />
                               )}

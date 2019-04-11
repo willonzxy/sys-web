@@ -19,14 +19,8 @@ import DataSet from "@antv/data-set";
 import Brush from "@antv/g2-brush";
 import $ from "jquery";
 
-let data;
-$.ajax({
-  url: "https://alifd.alibabausercontent.com/materials/@bizcharts/g2-brush-ds-state/0.2.9/mock.json",
-  async : false,
-  success: (iData) => { data = iData }
-});
 
-function getComponent(data) {
+function getComponent(data,attr) {
   $("#mountNode").html('<div id="canvas1"></div><div id="canvas2"></div>');
   const ds = new DataSet({
     state: {
@@ -45,22 +39,22 @@ function getComponent(data) {
       return obj;
     }
   });
-  const scale1 = {
+  let scale1 = {
     date: {
       tickCount: 10,
       type: "time",
-      mask: "MMM D YYYY"
+      mask: "MM/D hh:mm" // 这边的年月日要大写
     },
-    price: {
-      min: totalDv.min("price"),
-      max: totalDv.max("price")
+    [attr]: {
+      min: totalDv.min(attr),
+      max: totalDv.max(attr)
     }
   };
-  const scale2 = {
+  let scale2 = {
     date: {
       tickCount: 10,
       type: "time",
-      mask: "YYYY"
+      mask: "YYYY/MM/D hh:mm"
     }
   };
   let chart2;
@@ -99,26 +93,27 @@ function getComponent(data) {
             <Axis />
             <Tooltip />
             <Geom
-              type="area"
-              position="date*price"
+              type="line"
+              position={`date*${attr}`}
               shape="smooth"
               opacity={0.85}
             />
           </Chart>
           <Chart
+            
             height={window.innerHeight * (1 / 8)}
             data={data}
-            padding={[5, 20, 20, 80]}
+            padding={[10, 20, 20, 80]}
             scale={scale2}
             onGetG2Instance={g2Chart => {
               chart2 = g2Chart;
             }}
             forceFit
           >
-            <Axis name="price" visible={false} />
+            <Axis name={attr} visible={false} />
             <Geom
               type="area"
-              position="date*price"
+              position={`date*${attr}`}
               shape="smooth"
               acitve={false}
               opacity={0.85}
@@ -132,12 +127,14 @@ function getComponent(data) {
 }
 
 export default class Brushdsstate extends React.Component {
+  constructor(){
+    super(...arguments)
+  }
   render() {
-    const DoubleChart = getComponent(data);
+    let { attr,data } = this.props;
+    const DoubleChart = getComponent(data,attr);
     return (
-      <div>
-        <DoubleChart />
-      </div>
+      <DoubleChart />
     );
   }
 }
