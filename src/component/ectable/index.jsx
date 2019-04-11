@@ -162,7 +162,7 @@ class DOM extends React.Component{
                                         label={label}
                                         {...lay}
                                     >
-                                        <Sub />
+                                        <Button type="primary" htmlType={type}>{label}</Button>
                                     </Form.Item>
                                 )
                             }else{
@@ -176,7 +176,31 @@ class DOM extends React.Component{
                                             initialValue,
                                             rules
                                         })(
-                                            <Sub />
+                                            (function(){switch(type){
+                                                case 'input': var { placeholder='insert here',icon='tag',style } = item; return (
+                                                    <Input
+                                                        placeholder={placeholder} 
+                                                        prefix={<Icon type={icon} style={style} />}
+                                                    />
+                                                );
+                                                case 'uploader':var {attr,uploadApi,placeholder="click here upload",scene_id} = item; return (
+                                                    <Uploader name={attr} action={`${uploadApi}?scene_id=${scene_id}`} listType="picture">
+                                                        <Button>
+                                                            <Icon type="upload" /> {placeholder}
+                                                        </Button>
+                                                    </Uploader>
+                                                );
+                                                case 'textarea': var {rows} = item;return (
+                                                    <TextArea rows={rows} />
+                                                );
+                                                case 'number' :  var {min=0 ,max} = item; return (
+                                                    <InputNumber min={min} max={max}  />
+                                                );
+                                                case 'submit' : var {htmlType='submit',label='提交'} = item; return (
+                                                    <Button type="primary" htmlType={htmlType}>{label}</Button>
+                                                );
+                                                default:return <div>no this component</div>
+                                            }})()
                                         )}
                                     </Form.Item>
                                 )

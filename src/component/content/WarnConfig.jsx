@@ -31,9 +31,9 @@ const columns = [{
     title: '时间',
     key: 'date',
     dataIndex: 'date',
-    render:(text,record)=>(
-      <span>{dateFormat(record.date,'yyyy-mm-dd')}</span>
-    )
+    render:(text,record)=>{
+      return (<span>{dateFormat(+record.date,'yyyy-mm-dd')}</span>)
+    }
   },{
     title: '操作',
     key: 'action',
@@ -45,6 +45,7 @@ const columns = [{
       )
     }
   }];
+  
 const addForm = [
   {
     attr:'name',
