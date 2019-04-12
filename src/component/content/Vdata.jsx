@@ -74,7 +74,13 @@ export default class Vdata extends React.PureComponent {
         })
     }
     download = ()=>{
-        window.open('/download','_blank')
+        // window.open('/download','_blank')
+        let nd_a = window.document.createElement('a');
+            nd_a.href = '/download'
+            nd_a.download = 'package.json';
+        window.document.body.appendChild(nd_a)
+            nd_a.click()
+        //window.document.body.removeChild(nd_a)
     }
     search = ()=>{
         console.log(this.state.timeRange)

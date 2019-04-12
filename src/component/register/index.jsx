@@ -1,14 +1,14 @@
 /*
  * @Author: 伟龙-Willon qq:1061258787 
  * @Date: 2019-03-19 15:34:54 
- * @Last Modified by: 伟龙-Willon
- * @Last Modified time: 2019-04-01 15:11:02
+ * @Last Modified by: mikey.zhaopeng
+ * @Last Modified time: 2019-04-11 21:58:03
  */
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './index.css';
 import {
-    Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Button, AutoComplete, Upload,message
+    Form, Input, Tooltip, Icon, Select, Button, AutoComplete, Upload,message
 } from 'antd';
 import API from '../api.js';
 import md5 from 'md5'

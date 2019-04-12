@@ -1,0 +1,6 @@
+.btn-group-gap button:nth-child(n+2) , .ant-input-affix-wrapper:nth-child(n+2){
+    margin-left: 10px;
+}
+.addForm button:nth-child(n+2){
+    margin-left: 10px;
+}

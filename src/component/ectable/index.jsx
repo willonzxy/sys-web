@@ -4,6 +4,7 @@ import Uploader from '../uploader/index.jsx'
 import _fetch from '../../tool/fetch.js'
 import qs from 'querystring'
 import dateFormat from 'dateformat'
+import './index.css'
 const {TextArea} = Input;
 
 const lay = {
@@ -18,17 +19,17 @@ class DOM extends React.Component{
             if(item.key === 'action'){
                 let {actions} = item;
                 item.render = (text,record)=>{
-                    return (<div>
+                    return (<div className="btn-group-gap">
                         {
                             actions.map(item=>{
                                 switch(item){
                                     case 'd':return (
-                                            <Popconfirm title="Are you sure delete this info?" onConfirm={this.del.bind(this,record._id)} okText="Yes" cancelText="No">
+                                            <Popconfirm key={item} title="Are you sure delete this info?" onConfirm={this.del.bind(this,record._id)} okText="Yes" cancelText="No">
                                                 <Button type="danger">删除</Button>
                                             </Popconfirm>
                                     );
                                     case 'u':return (
-                                        <Button type="dash" >修改</Button>
+                                        <Button  key={item} type="dash" >修改</Button>
                                     );
                                     default:return (<div>don't have this component</div>)
                                 }
@@ -36,6 +37,14 @@ class DOM extends React.Component{
                             })
                         }
                     </div>)
+                }
+            }
+            if(item.key === 'changeStatus'){
+                item.render = (text,record)=>{
+                    let {_id,status} = record;
+                    return (
+                        <Switch key={item} onChange={this.onChangeStatus.bind(this,_id,status)} checked={!!(+record.status)}/>
+                    );
                 }
             }
         });
@@ -52,6 +61,17 @@ class DOM extends React.Component{
     }
     componentDidMount(){
         this.getTableData()
+    }
+    onChangeStatus = (_id,status) =>{
+        let { api } = this.state;
+        _fetch.patch(`${api}/${_id}`,{status:status == '0' ? '1' : '0' })
+        .then(res=>{
+            if(res.status === 1){
+                message.success('更改状态成功')
+                return this.getTableData()
+            }
+            message.warn('更改状态成功')
+        })
     }
     del = (id) => {
         let { api } = this.state;
@@ -85,7 +105,11 @@ class DOM extends React.Component{
     // }
     getTableData = () => {
         let { api,searchForm,searchFormData} = this.state;
-        Object.keys(searchForm).length > 0 && (api = `${api}?${qs.stringify(searchFormData)}`)
+        let query = {...searchFormData};
+        for(let key in query){
+            !query[key] && (delete query[key])
+        }
+        Object.keys(query).length > 0 && (api = `${api}?${qs.stringify(query)}`)
         _fetch.get(api)
         .then(res => {
             if(res.status === 1){
@@ -100,7 +124,8 @@ class DOM extends React.Component{
     onChange = (attr,e) =>{
         this.setState({
             searchFormData:{
-                [attr]:e.target.value
+                ...this.state.searchFormData,
+                [attr]:e.target.value,
             }
         })
     }
@@ -149,17 +174,26 @@ class DOM extends React.Component{
                     visible={this.state.visible}
                     width='400px'
                 >
-                    <Form onSubmit={this.handleSubmit} className="login-form" layout="horizontal">
+                    <Form onSubmit={this.handleSubmit} className="addForm" layout="horizontal">
                     {
                         addForm.map(item=>{
                             var {attr='',initialValue="",rules,type,label} = item;
-                            if(type === "submit"){
+                            if(type === "action"){
                                 return (
                                     <Form.Item 
                                         label={label}
                                         {...lay}
-                                    >
-                                        <Button type="primary" htmlType={type}>{label}</Button>
+                                        key={attr}
+                                    >{
+                                        item.actions.map(ele=>{
+                                            switch(ele){
+                                                case 'submit':return <Button type="primary" htmlType="submit">提交</Button>;
+                                                case 'reset':return <Button type="default" htmlType="reset">重置</Button>;
+                                                default:return (<div>no this component</div>)
+                                            }
+                                        })
+                                    }
+                                        
                                     </Form.Item>
                                 )
                             }else{
@@ -192,9 +226,6 @@ class DOM extends React.Component{
                                                 );
                                                 case 'number' :  var {min=0 ,max} = item; return (
                                                     <InputNumber min={min} max={max}  />
-                                                );
-                                                case 'submit' : var {htmlType='submit',label='提交'} = item; return (
-                                                    <Button type="primary" htmlType={htmlType}>{label}</Button>
                                                 );
                                                 default:return <div>no this component</div>
                                             }})()

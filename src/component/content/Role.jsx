@@ -1,42 +1,19 @@
 import React from 'react'
 import ECTable from '../ectable/index.jsx'
-import dateFormat from 'dateformat';
 const columns = [{
     title: '字典id',
     dataIndex: 'd_id',
     key: 'd_id'
   }, 
   {
-    title: '指标名称',
+    title: '字典名称',
     dataIndex: 'name',
     key: 'name',
-  }, 
-  {
-    title: '阈值',
-    dataIndex: 'threshold',
-    key: 'threshold',
   },
   {
-    title:'预警通知',
-    dataIndex:'msg',
-    key:'msg',
-  },
-  {
-    title:'状态',
-    dataIndex:'status',
-    key:'status'
-  },
-  {
-    title: '时间',
-    key: 'date',
-    dataIndex: 'date',
-    render:(text,record)=>{
-      return (<span>{dateFormat(+record.date,'yyyy-mm-dd')}</span>)
-    }
-  },
-  {
-    title:'状态',
-    key:'changeStatus'
+    title: '描述',
+    dataIndex: 'desc',
+    key: 'desc',
   },
   {
     title: '操作',
@@ -46,8 +23,8 @@ const columns = [{
 ];
 const addForm = [
   {
-    attr:'name',
-    label:'指标名称',
+    attr:'d_id',
+    label:'字典id',
     type:'input',
     rules:[{
       required:true,
@@ -55,17 +32,17 @@ const addForm = [
     }]
   },
   {
-    attr:'threshold',
-    label:'阈值',
-    type:'number',
+    attr:'name',
+    label:'含义',
+    type:'input',
     rules:[{
       required:true,
       message:'please insert '
     }]
   },
   {
-    attr:'msg',
-    label:'预警信息',
+    attr:'desc',
+    label:'描述',
     type:'textarea',
   },
   {
@@ -77,10 +54,16 @@ const addForm = [
 const search = [
   {
     type:'input',
+    attr:'d_id',
+    label:'字典id',
+    icon:'book'
+  },
+  {
+    type:'input',
     attr:'name',
-    label:'指标名称',
+    label:'字典名称',
     icon:'tag'
-  }
+  },
 ]
 /** 使用方法
  * const EasyTable = ECTable('tablename')
@@ -91,9 +74,9 @@ export default () => {
   const EasyTable = ECTable('warnconfig')
   return (
     <EasyTable 
-      DrawerName={'新增指标监控'}
+      DrawerName={'新增字典项'}
       cols={columns} 
-      api="/warnconfig" 
+      api="/dir" 
       searchForm={search}
       addForm={addForm}
     />

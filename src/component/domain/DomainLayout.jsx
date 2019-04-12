@@ -2,7 +2,7 @@
  * @Author: 伟龙-Willon qq:1061258787 
  * @Date: 2019-03-18 14:41:51 
  * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2019-04-09 11:27:32
+ * @Last Modified time: 2019-04-12 20:41:09
  */
 import React from 'react'
 import {Layout, Menu, Icon,} from 'antd'
@@ -10,7 +10,6 @@ import Breadcrumb from '../../router/breadcrumb/index.jsx'
 import { Link } from 'react-router-dom'
 import '../../css/layout.css'
 const {Header, Content, Footer, Sider,} = Layout;
-const SubMenu = Menu.SubMenu;
   
 class DomainLayout extends React.Component {
 
@@ -55,7 +54,10 @@ class DomainLayout extends React.Component {
                         <Link to="/domain/warnsetting"><Icon type="warning" />预警配置</Link>
                     </Menu.Item>
                     <Menu.Item key="4">
-                        <Link to="/domain/userrolesetting"><Icon type="user" />人员角色</Link>
+                        <Link to="/domain/role"><Icon type="user" />人员角色</Link>
+                    </Menu.Item>
+                    <Menu.Item key="5">
+                        <Link to="/domain/dir"><Icon type="user" />字典配置</Link>
                     </Menu.Item>
                     {/* <Menu.Item key="1">
                         <Icon type="pie-chart" />
