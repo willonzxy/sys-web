@@ -22,7 +22,7 @@ class Warehouse extends React.PureComponent{
             dataSource:[],
             columns:[{
               title: '类型',
-              dataIndex: 'name',
+              dataIndex: 'warehouse_name',
               key: 'name'
             }, {
               title: '库存',
@@ -34,8 +34,8 @@ class Warehouse extends React.PureComponent{
               key: 'used',
             }, {
               title: '日期',
-              key: 'date',
-              dataIndex: 'date',
+              key: 'warehouse_created_date',
+              dataIndex: 'warehouse_created_date',
               render:(text,record)=>(
                 <span>{dateFormat(record.date,'yyyy-mm-dd')}</span>
               )
@@ -54,7 +54,6 @@ class Warehouse extends React.PureComponent{
       this.getWarehouseData()
     }
     del = (id) => {
-      console.log(id)
       _fetch.del(`${warehouse.get.path}/${id}`).then(res=>{
         if(res.status === 1){
           return this.getWarehouseData()
@@ -130,7 +129,7 @@ class Warehouse extends React.PureComponent{
                             label="类型"
                             {...lay}
                           >
-                              {getFieldDecorator('name', {
+                              {getFieldDecorator('warehouse_name', {
                                   initialValue:"lucy",
                                   rules: [{ required: true, message: 'Please select name!' }],
                               })(
@@ -154,8 +153,8 @@ class Warehouse extends React.PureComponent{
                               </span>)}
                             {...lay}
                           >
-                            {getFieldDecorator('pic')(
-                              <Uploader name="pic" action={`${upload.path}?scene_id=wareshouse`} listType="picture">
+                            {getFieldDecorator('warehouse_pic')(
+                              <Uploader name="warehouse_pic" action={`${upload.path}?scene_id=wareshouse&attr=warehouse_pic`} listType="picture">
                                 <Button>
                                   <Icon type="upload" /> Click to upload
                                 </Button>
@@ -166,7 +165,7 @@ class Warehouse extends React.PureComponent{
                             label="描述"
                             {...lay}
                           >
-                              {getFieldDecorator('desc')(
+                              {getFieldDecorator('warehouse_desc')(
                                 <TextArea rows={4} />
                               )}
                           </Form.Item>

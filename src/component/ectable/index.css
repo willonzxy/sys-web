@@ -4,3 +4,11 @@
 .addForm button:nth-child(n+2){
     margin-left: 10px;
 }
+.search-tools{
+    display: flex;
+    justify-content: flex-start;
+    align-items:center;
+}
+.search-tools .gap{
+    margin-left: 10px;
+}

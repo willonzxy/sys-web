@@ -1,15 +1,17 @@
 import React from 'react'
 import ECTable from '../ectable/index.jsx'
 import dateFormat from 'dateformat';
+import API from '../api.js'
+const {getWarnTags} = API;
 const columns = [{
     title: '字典id',
-    dataIndex: 'd_id',
-    key: 'd_id'
+    dataIndex: "warnconfig_d_id",
+    key: 'warnconfig_d_id'
   }, 
   {
     title: '指标名称',
-    dataIndex: 'name',
-    key: 'name',
+    dataIndex: 'warnconfig_name',
+    key: 'warnconfig_name',
   }, 
   {
     title: '阈值',
@@ -23,32 +25,36 @@ const columns = [{
   },
   {
     title:'状态',
-    dataIndex:'status',
-    key:'status'
+    dataIndex:'warnconfig_status',
+    key:'warnconfig_status'
   },
   {
     title: '时间',
-    key: 'date',
-    dataIndex: 'date',
+    key: 'warnconfig_created_date',
+    dataIndex: 'warnconfig_created_date',
     render:(text,record)=>{
-      return (<span>{dateFormat(+record.date,'yyyy-mm-dd')}</span>)
+      return (<span>{dateFormat(+record.warnconfig_created_date,'yyyy-mm-dd')}</span>)
     }
   },
   {
     title:'状态',
-    key:'changeStatus'
+    key:'changeStatus',
+    attr:'warnconfig_status'
   },
   {
     title: '操作',
     key: 'action',
-    actions:['d','u']
+    actions:['delete','update']
   }
 ];
 const addForm = [
   {
-    attr:'name',
+    attr:'warnconfig_d_id',
     label:'指标名称',
-    type:'input',
+    type:'api-select',
+    dataIndex:'d_id',
+    show:'dir_name',
+    api:getWarnTags,
     rules:[{
       required:true,
       message:'please insert'

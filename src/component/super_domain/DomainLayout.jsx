@@ -2,7 +2,7 @@
  * @Author: 伟龙-Willon qq:1061258787 
  * @Date: 2019-03-18 14:41:51 
  * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2019-04-16 00:58:35
+ * @Last Modified time: 2019-04-16 00:27:15
  */
 import React from 'react'
 import {Layout, Menu, Icon} from 'antd'
@@ -44,15 +44,15 @@ class DomainLayout extends React.Component {
                         <Menu.Item key="2"><Link to="/domain/area">区域管理</Link></Menu.Item>
 
                     </SubMenu> */}
-                    <Menu.Item key="1">
+                    {/* <Menu.Item key="1">
                         <Link to="/domain/area"><Icon type="area-chart" />区域监控</Link>
-                    </Menu.Item>
+                    </Menu.Item> */}
                     {/* <Menu.Item key="2">
                         <Link to="/domain/warehouse"><Icon type="inbox" />仓储管理</Link>
                     </Menu.Item> */}
-                    <Menu.Item key="3">
+                    {/* <Menu.Item key="3">
                         <Link to="/domain/warnsetting"><Icon type="warning" />预警配置</Link>
-                    </Menu.Item>
+                    </Menu.Item> */}
                     {/* <SubMenu
                         key="sub1"
                         title={<span><Icon type="line-chart" /><span>人员角色</span></span>}
@@ -61,11 +61,14 @@ class DomainLayout extends React.Component {
                         <Menu.Item key="sub1-2"><Link to="/domain/rolectrl">角色权限</Link></Menu.Item>
                         <Menu.Item key="sub1-3"><Link to="/domain/powerctrl">权限管理</Link></Menu.Item>
                     </SubMenu> */}
-                    <Menu.Item key="sub1-1"><Link to="/domain/userctrl"><Icon type="inbox" />人员管理</Link></Menu.Item>
-                    <Menu.Item key="sub1-2"><Link to="/domain/rolectrl"><Icon type="inbox" />角色权限</Link></Menu.Item>
-                    <Menu.Item key="sub1-3"><Link to="/domain/powerctrl"><Icon type="inbox" />权限管理</Link></Menu.Item>
-                    <Menu.Item key="5">
-                        <Link to="/domain/dir"><Icon type="user" />字典配置</Link>
+                    <Menu.Item key="1">
+                        <Link to="/superdomain/company"><Icon type="alibaba" />公司审查</Link>
+                    </Menu.Item>
+                    <Menu.Item key="2">
+                        <Link to="/superdomain/powerctrl"><Icon type="tool" />权限管理</Link>
+                    </Menu.Item>
+                    <Menu.Item key="3">
+                        <Link to="/superdomain/dir"><Icon type="book" />字典配置</Link>
                     </Menu.Item>
                     {/* <Menu.Item key="1">
                         <Icon type="pie-chart" />
@@ -95,7 +98,7 @@ class DomainLayout extends React.Component {
             <Layout>
                 <Header style={{ background: '#fff', padding: 0 }} />
                 <Content style={{ margin: '0 16px' }}>
-                    {/* <Breadcrumb style={{ margin: '16px 0' }} /> */}
+                    
                     <div style={{ padding: 24, background: '#fff', minHeight: 360,marginTop:'16px' }}>
                         {
                             this.props.children

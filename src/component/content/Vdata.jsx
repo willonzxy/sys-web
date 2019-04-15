@@ -89,7 +89,7 @@ export default class Vdata extends React.PureComponent {
         return <div>asd</div>
     }
     render(){
-        const { _id,pic,area_name} = this.props.location.state;
+        const { _id,area_pic,area_name} = this.props.location.state;
         return (
             <div className="vdata">
                 <div className="sensor-list-box space-between" >
@@ -105,7 +105,7 @@ export default class Vdata extends React.PureComponent {
                     </div>
                     <div>
                         <span style={{paddingRight:'20px'}}>{area_name}</span>
-                        <img width="60px" height="60px" src={pic} alt={area_name}/>
+                        <img width="60px" height="60px" src={area_pic} alt={area_name}/>
                     </div>
                 </div>
                 <div className="sensor-list gap-t">
