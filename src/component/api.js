@@ -2,7 +2,7 @@
  * @Author: 伟龙-Willon qq:1061258787 
  * @Date: 2019-03-19 10:51:36 
  * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2019-04-17 14:04:35
+ * @Last Modified time: 2019-04-18 01:37:27
  */
 /** 组件所用的所有api都收藏于此，统一管理 */
 const baseApi = 'http://localhost:4000',
@@ -42,6 +42,8 @@ export default {
         path:'/upload',
         method:'post'
     },
+    user:'/user',
+    warn:'/warnconfig',
     power:'/power',
     role:'/role',
     getCollections:'/dir?p_id=C',

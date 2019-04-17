@@ -1,7 +1,7 @@
 import React from 'react'
 import ECTable from '../ectable/index.jsx'
 import API from '../api.js'
-const {role,upload} = API
+const {role,upload,user} = API
 /**  
  * 
  * company_id:{type:String,required:true},
@@ -53,12 +53,6 @@ const required = [{
 }] 
 
 const addForm = [
-  {
-    attr:'user_company_id',
-    label:'公司',
-    type:'input',
-    rules:required
-  },
   {
     attr:'tel',
     label:'电话',
@@ -112,13 +106,15 @@ const search = [
  * const EasyTable = ECTable('tablename')
  * <EasyTable cols={cols} api={/usr} addForm={addForm} search={search}/>
  */
-const EasyTable = ECTable('useronfig')
+const tableName = 'user'
+const EasyTable = ECTable(tableName)
 export default () => {
   return (
     <EasyTable
       DrawerName={'新增人员'}
       cols={columns}
-      api="/user"
+      tableName={tableName}
+      api={user}
       searchForm={search}
       addForm={addForm}
     />

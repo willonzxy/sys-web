@@ -2,7 +2,7 @@
  * @Author: 伟龙-Willon qq:1061258787 
  * @Date: 2019-03-18 17:07:55 
  * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2019-04-16 21:18:39
+ * @Last Modified time: 2019-04-18 01:50:16
  */
 import React from 'react'
 import '../../css/area.css'
@@ -93,7 +93,15 @@ const search = [
 ]
 
 const EasyTable = ECTable('areaConfig')
-
+/**
+ * @description
+ * @author willon
+ * @date 2019-04-18
+ * @export
+ * @class Area
+ * @extends {React.PureComponent}
+ * 写成这样是想让，内部组件能有个router
+ */
 export default class Area extends React.PureComponent{
   constructor(){
     super(...arguments)
@@ -103,7 +111,8 @@ export default class Area extends React.PureComponent{
       <EasyTable
         props={this.props}
         DrawerName={'区域配置'}
-        cols={columns} 
+        cols={columns}
+        tableName='area'
         api={area}
         searchForm={search}
         addForm={addForm}

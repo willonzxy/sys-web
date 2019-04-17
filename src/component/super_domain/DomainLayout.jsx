@@ -2,7 +2,7 @@
  * @Author: 伟龙-Willon qq:1061258787 
  * @Date: 2019-03-18 14:41:51 
  * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2019-04-17 12:00:59
+ * @Last Modified time: 2019-04-17 23:03:27
  */
 import React from 'react'
 import {Layout, Menu, Icon,message} from 'antd'
@@ -89,8 +89,8 @@ class DomainLayout extends React.Component {
             <Layout>
                 <Header style={{ background: '#fff', padding: 0 }} >
                     <div style={{textAlign:'right',paddingRight:'20px'}}>
-                        <Icon type='user' />:{tel}
-                        <Icon type='tool' style={{marginLeft:'20px'}}/>:{role === 'super_domain'?'平台超级管理员':'平台使用者'}
+                        <Icon type='user' /> : {tel}
+                        <Icon type='tool' style={{marginLeft:'20px'}}/> : {role === 'super_domain'?'平台超级管理员':'平台使用者'}
                     </div>
                 </Header>
                 <Content style={{ margin: '0 16px' }}>

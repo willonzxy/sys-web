@@ -51,7 +51,7 @@ const columns = [{
   {
     title: '操作',
     key: 'action',
-    actions:['delete','update']
+    actions:['A2','A3','A1','A4']
   }
 ];
 

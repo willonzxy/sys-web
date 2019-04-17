@@ -2,7 +2,7 @@ import React from 'react'
 import ECTable from '../ectable/index.jsx'
 import dateFormat from 'dateformat';
 import API from '../api.js'
-const {getWarnTags} = API;
+const {getWarnTags,warn} = API;
 const columns = [{
     title: '字典id',
     dataIndex: "warnconfig_d_id",
@@ -13,6 +13,11 @@ const columns = [{
     dataIndex: 'warnconfig_name',
     key: 'warnconfig_name',
   }, 
+  {
+    title:'接收者',
+    dataIndex:'receive',
+    key:'receive'
+  },
   {
     title: '阈值',
     dataIndex: 'threshold',
@@ -75,6 +80,11 @@ const addForm = [
     type:'textarea',
   },
   {
+    attr:'receive',
+    label:'接收者',
+    type:'input',
+  },
+  {
     type:'action',
     actions:['submit','reset'],
     label:'操作'
@@ -92,14 +102,15 @@ const search = [
  * const EasyTable = ECTable('tablename')
  * <EasyTable cols={cols} api={/usr} addForm={addForm} search={search}/>
  */
-const EasyTable = ECTable('warnsetting')
+const tableName = 'warnsetting';
+const EasyTable = ECTable(tableName)
 export default () => {
   return (
     <EasyTable 
       DrawerName={'新增指标监控'}
       cols={columns} 
-      tablename={'tablename'}
-      api="/warnconfig" 
+      tableName={tableName}
+      api={warn}
       searchForm={search}
       addForm={addForm}
     />

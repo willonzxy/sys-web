@@ -31,7 +31,7 @@ const columns = [{
   {
     title: '操作',
     key: 'action',
-    actions:['delete','update']
+    actions:['A2','A3','A1','A4']
   }
 ];
 const addForm = [
@@ -40,7 +40,7 @@ const addForm = [
     label:'父级名称',
     type:'api-select',
     api:`${dir}?p_id=DIR`,
-    dataIndex:'_id',
+    dataIndex:'d_id',
     show:'dir_name',
     //rules:antd_table_required
   },

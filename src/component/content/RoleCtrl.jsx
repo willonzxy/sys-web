@@ -30,7 +30,7 @@ const columns = [
   {
     title: '操作',
     key: 'action',
-    actions:['delete','update']
+    actions:['A2','A3','A1','A4']
   }
 ];
 
@@ -46,7 +46,7 @@ const addForm = [
   },
   {
     type:'tree-select', // 选取多个权限
-    api:power,
+    api:`${power}?pageSize=10000`,
     label:'选取权限',
     attr:'power_list',
     dataIndex:'_id',
@@ -95,12 +95,14 @@ const select = [
  * const EasyTable = ECTable('tablename')
  * <EasyTable cols={cols} api={/usr} addForm={addForm} search={search}/>
  */
-const EasyTable = ECTable('roleConfig')
+const tableName = 'area';
+const EasyTable = ECTable(tableName)
 export default () => {
   return (
-    <EasyTable 
+    <EasyTable
       DrawerName={'角色'}
       cols={columns} 
+      tableName={tableName}
       api="/role"
       searchForm={select}
       addForm={addForm}

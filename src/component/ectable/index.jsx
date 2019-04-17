@@ -18,10 +18,12 @@ const lay = {
 class ECCOM extends React.Component{
     constructor(){
         super(...arguments);
-        let { cols,api,searchForm,addForm,DrawerName } = this.props;
+        let { cols,api,searchForm,addForm,DrawerName,tableName } = this.props;
+        let actions = [];
+        cols = filter.tableFilter(tableName,cols);
         cols.forEach(item => {
             if(item.key === 'action'){
-                let {actions} = item;
+                actions = item.actions
                 console.log(actions)
                 item.render = (text,record)=>{
                     return (<div className="btn-group-gap">
@@ -36,10 +38,10 @@ class ECCOM extends React.Component{
                                     case 'A3':return (
                                         <Button  key={item} type="dashed" onClick={this.onReadyUpdate.bind(this,record)}>修改</Button>
                                     );
-                                    case 'detail':return (
+                                    case 'A3':return (
                                         <Button type="default" className="gap-l" onClick={this.gotoDetail.bind(this,record)}>详情</Button>
                                     );
-                                    default:return (<div>don't have this component</div>)
+                                    default:return ''
                                 }
                             })
                         }
@@ -71,6 +73,7 @@ class ECCOM extends React.Component{
             isAdd:true,
             total:0,
             current:0,
+            actions,
             DrawerName,
             searchForm, // 搜索配置
             addForm, // 新增配置
@@ -217,12 +220,13 @@ class ECCOM extends React.Component{
     }
 
     render(){
-    const { cols,searchForm,searchFormData,DrawerName,addForm,readyUpdateData,isAdd,total,current,pageSize} = this.state;
+    const { cols,searchForm,searchFormData,DrawerName,addForm,readyUpdateData,isAdd,total,current,pageSize,actions} = this.state;
     const { getFieldDecorator } = this.props.form;
-    const {tablename} = this.props
         return (
             <div className="warehouse">
-                <div className="search-tools">
+            {
+                actions.includes('A4') && (
+                    <div className="search-tools">
                     {
                         searchForm.map(({type,...config})=>{
                             switch(type){
@@ -254,9 +258,12 @@ class ECCOM extends React.Component{
                         // ref={node => this.userNameInput = node}
                     /> */}
                     <Button type="default" icon="search" className="gap-l" onClick={this.search}>Search</Button>
-                    {addForm && addForm.length && <Button type="default" icon="plus" className="gap-l" onClick={this.changeDrawerState}>新增</Button>}
+                    {addForm && addForm.length && actions.includes('A1') && <Button type="default" icon="plus" className="gap-l" onClick={this.changeDrawerState}>新增</Button>}
                 </div>
-                <Table columns={ filter.tableFilter(tablename,cols) } dataSource={this.state.dataSource} pagination={{onChange:this.onPageChange,pageSize,total,current}}/>
+                )
+            }
+                
+                {actions.includes('A4') && <Table columns={cols} dataSource={this.state.dataSource} pagination={{onChange:this.onPageChange,pageSize,total,current}}/>}
                 {
                     ( (addForm && addForm.length) || (readyUpdateData && readyUpdateData.length))&& <Drawer
                     title={isAdd ? `新增${DrawerName}` :`修改${DrawerName}`}

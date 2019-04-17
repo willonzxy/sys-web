@@ -2,34 +2,6 @@ import React from 'react'
 import { TreeSelect,message } from 'antd';
 import _fetch from '../../tool/fetch.js'
 const SHOW_PARENT = TreeSelect.SHOW_PARENT;
-
-const treeData = [{
-  title: 'Node1',
-  value: '0-0',
-  key: '0-0',
-  children: [{
-    title: 'Child Node1',
-    value: '0-0-0',
-    key: '0-0-0',
-  }],
-}, {
-  title: 'Node2',
-  value: '0-1',
-  key: '0-1',
-  children: [{
-    title: 'Child Node3',
-    value: '0-1-0',
-    key: '0-1-0',
-  }, {
-    title: 'Child Node4',
-    value: '0-1-1',
-    key: '0-1-1',
-  }, {
-    title: 'Child Node5',
-    value: '0-1-2',
-    key: '0-1-2',
-  }],
-}];
  
 export default class LazyTreeSelect extends React.Component {
   state = {
@@ -84,7 +56,7 @@ componentDidMount(){
                 })
               }
           });
-          
+          console.log(arr)
           return this.setState({
                 data:arr
           })
