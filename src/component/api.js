@@ -2,7 +2,7 @@
  * @Author: 伟龙-Willon qq:1061258787 
  * @Date: 2019-03-19 10:51:36 
  * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2019-04-15 21:10:47
+ * @Last Modified time: 2019-04-17 14:04:35
  */
 /** 组件所用的所有api都收藏于此，统一管理 */
 const baseApi = 'http://localhost:4000',
@@ -18,7 +18,7 @@ export default {
     },
     register:{
         signIn:{
-            path:'/company/register',
+            path:'/company',
             method:'post',
         }
     },
@@ -47,5 +47,9 @@ export default {
     getCollections:'/dir?p_id=C',
     getActions:'/dir?p_id=A',
     getWarnTags:'/dir?p_id=W',
-    table_data_set:'/tabledataset'
+    table_data_set:'/tabledataset',
+    getOwnMenu:'/ownMenu?role=domain',
+    getSuperDomainMenu:'/ownMenu?role=super_domain',
+    company:'/company',
+    getSession:'/session'
 }

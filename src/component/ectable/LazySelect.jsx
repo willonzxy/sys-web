@@ -8,7 +8,7 @@ export default class LazySelect extends React.PureComponent {
         super(...arguments)
         let {attr} = this.props;
         this.state = {
-            [attr+'_list']:[]
+            [attr+'_list']:[],
         }
     }
     componentDidMount(){
@@ -29,14 +29,18 @@ export default class LazySelect extends React.PureComponent {
         //     [attr]:val, //d_id
         //     [attr1]:this.state[attr+'_list'].filter(i=>i[dataIndex]===val)[0][show], // name
         // })
+        this.setState({
+            value:val
+        })
         onSelectChange(attr,val)
     }
     render(){
-        let {attr,show,dataIndex,mode} = this.props
+        let {attr,show,dataIndex,mode,defaultValue} = this.props
         return (
             <Select 
                 onChange={this.onChange}
                 mode={mode}
+                defaultValue={defaultValue}
             >
                 {
                     this.state[attr+'_list'] && this.state[attr+'_list'].map((data,index)=>{

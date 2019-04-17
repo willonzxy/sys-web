@@ -28,6 +28,7 @@ const columns = [{
     title: '头像',
     dataIndex: 'avatar',
     key: 'avatar',
+    type:'pic'
   },
   {
     title:'角色',

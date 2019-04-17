@@ -42,7 +42,7 @@ const addForm = [
     api:`${dir}?p_id=DIR`,
     dataIndex:'_id',
     show:'dir_name',
-    rules:antd_table_required
+    //rules:antd_table_required
   },
   {
     attr:'d_id',

@@ -2,7 +2,7 @@
  * @Author: 伟龙-Willon qq:1061258787 
  * @Date: 2019-03-18 17:07:55 
  * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2019-04-15 22:22:43
+ * @Last Modified time: 2019-04-16 21:18:39
  */
 import React from 'react'
 import '../../css/area.css'
@@ -24,6 +24,7 @@ const columns = [{
     title:'缩略图',
     dataIndex:'area_pic',
     key:'area_pic',
+    type:'pic'
   },{
     title: '传感器列表',
     dataIndex: 'sensor_list',

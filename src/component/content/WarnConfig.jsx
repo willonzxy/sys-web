@@ -92,13 +92,13 @@ const search = [
  * const EasyTable = ECTable('tablename')
  * <EasyTable cols={cols} api={/usr} addForm={addForm} search={search}/>
  */
-
+const EasyTable = ECTable('warnsetting')
 export default () => {
-  const EasyTable = ECTable('warnconfig')
   return (
     <EasyTable 
       DrawerName={'新增指标监控'}
       cols={columns} 
+      tablename={'tablename'}
       api="/warnconfig" 
       searchForm={search}
       addForm={addForm}

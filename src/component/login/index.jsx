@@ -2,7 +2,7 @@
  * @Author: 伟龙-Willon qq:1061258787 
  * @Date: 2019-03-18 17:07:55 
  * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2019-04-07 10:23:01
+ * @Last Modified time: 2019-04-17 10:37:18
  */
 import React from 'react';
 import {
@@ -30,14 +30,25 @@ class NormalLoginForm extends React.Component {
                 .then(res=>{
                     if(res.status === 1){
                         message.success('登录成功')
-                        this.props.history.push({
-                          pathname:'/domain',
-                          params:{
-                            tel:data.tel
-                          }
-                        })
-                        return
-                      }
+                        if(res.super_domain === true){
+                            this.props.history.push({
+                                pathname:'/superdomain',
+                                params:{
+                                  tel:data.tel,
+                                  role:'super_domain'
+                                }
+                              })
+                        }else{
+                            this.props.history.push({
+                                pathname:'/domain',
+                                params:{
+                                    tel:data.tel
+                                }
+                            })
+                        }
+                    }else{
+                        message.error('登陆失败')
+                    }
                 })
             }
         });
@@ -67,11 +78,11 @@ class NormalLoginForm extends React.Component {
                         )}
                     </Form.Item>
                     <Form.Item>
-                        {getFieldDecorator('remember', {
-                            valuePropName: 'checked',
+                        {getFieldDecorator('domain', {
+                            valuePropName: 'domain',
                             initialValue: true,
                         })(
-                            <Checkbox>Remember me</Checkbox>
+                            <Checkbox>管理员登录</Checkbox>
                         )}
                         <a className="login-form-forgot" href="">Forgot password</a>
                         <Button type="primary" htmlType="submit" className="login-form-button">

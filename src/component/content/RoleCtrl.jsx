@@ -51,7 +51,7 @@ const addForm = [
     attr:'power_list',
     dataIndex:'_id',
     groupBy:'collection_name',
-    show:'power_name',
+    show:'action',
     
   },
   {

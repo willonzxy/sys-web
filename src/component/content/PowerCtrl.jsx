@@ -47,7 +47,7 @@ const addForm = [
     label:'操作集合',
     type:'api-select',
     dataIndex:'d_id',
-    show:'name', // option 显示的字段
+    show:'dir_name', // option 显示的字段
     api:getCollections,
     rules:antd_table_required
   },
@@ -57,7 +57,7 @@ const addForm = [
     label:'动作权限',
     type:'api-select',
     dataIndex:'d_id',
-    show:'name', // option 显示的字段
+    show:'dir_name', // option 显示的字段
     api:getActions,
     rules:antd_table_required
   },

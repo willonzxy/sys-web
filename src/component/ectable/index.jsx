@@ -4,6 +4,7 @@ import Uploader from '../uploader/index.jsx'
 import LazySelect from './LazySelect.jsx'
 import LazyTreeSelect from './LazyTreeSelect.jsx'
 import _fetch from '../../tool/fetch.js'
+import filter from '../../tool/filter.js'
 import qs from 'querystring'
 import dateFormat from 'dateformat'
 import './index.css'
@@ -18,21 +19,21 @@ class ECCOM extends React.Component{
     constructor(){
         super(...arguments);
         let { cols,api,searchForm,addForm,DrawerName } = this.props;
-        console.log(this.props)
         cols.forEach(item => {
             if(item.key === 'action'){
                 let {actions} = item;
+                console.log(actions)
                 item.render = (text,record)=>{
                     return (<div className="btn-group-gap">
                         {
                             actions.map(item=>{
                                 switch(item){
-                                    case 'delete':return (
+                                    case 'A2':return (
                                             <Popconfirm key={item} title="Are you sure delete this info?" onConfirm={this.del.bind(this,record._id)} okText="Yes" cancelText="No">
                                                 <Button type="danger">删除</Button>
                                             </Popconfirm>
                                     );
-                                    case 'update':return (
+                                    case 'A3':return (
                                         <Button  key={item} type="dashed" onClick={this.onReadyUpdate.bind(this,record)}>修改</Button>
                                     );
                                     case 'detail':return (
@@ -45,7 +46,7 @@ class ECCOM extends React.Component{
                     </div>)
                 }
             }
-            if(item.key === 'avatar' || item.key.includes('pic')){
+            if(item.type === 'pic'){
                 item.render = (text,record)=>{
                     return (
                         <div><img src={record[item.key]} alt={item.title} width={item.width||'50px'} height={item.height || '50px'} /></div>
@@ -56,7 +57,7 @@ class ECCOM extends React.Component{
                 item.render = (text,record)=>{
                     let {_id} = record;
                     return (
-                        <Switch key={item} onChange={this.onChangeStatus.bind(this,_id,record[item.attr],item.attr)} checked={!!(+record[item.attr])}/>
+                        <Switch key={_id} onChange={this.onChangeStatus.bind(this,_id,record[item.attr],item.attr)} checked={!!(+record[item.attr])}/>
                     );
                 }
             }
@@ -81,12 +82,10 @@ class ECCOM extends React.Component{
         // 获取列表数据
         this.getTableData()
         // 获取所要的配置数据，贴别是select模块
-        
-        
     }
     onChangeStatus = (_id,status,attr) =>{
         let { api } = this.state;
-        _fetch.patch(`${api}/${_id}`,{[attr]:status == '0' ? '1' : '0' })
+        _fetch.patch(`${api}/${_id}`,{[attr]:status == 0 ? 1 : 0 })
         .then(res=>{
             if(res.status === 1){
                 message.success('更改状态成功')
@@ -113,7 +112,6 @@ class ECCOM extends React.Component{
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, data) => {
-            console.log(data)
             if (!err) {
                 this.state.addForm.forEach(item=>{
                     if(item.type==='uploader'){
@@ -221,6 +219,7 @@ class ECCOM extends React.Component{
     render(){
     const { cols,searchForm,searchFormData,DrawerName,addForm,readyUpdateData,isAdd,total,current,pageSize} = this.state;
     const { getFieldDecorator } = this.props.form;
+    const {tablename} = this.props
         return (
             <div className="warehouse">
                 <div className="search-tools">
@@ -257,7 +256,7 @@ class ECCOM extends React.Component{
                     <Button type="default" icon="search" className="gap-l" onClick={this.search}>Search</Button>
                     {addForm && addForm.length && <Button type="default" icon="plus" className="gap-l" onClick={this.changeDrawerState}>新增</Button>}
                 </div>
-                <Table columns={cols} dataSource={this.state.dataSource} pagination={{onChange:this.onPageChange,pageSize,total,current}}/>
+                <Table columns={ filter.tableFilter(tablename,cols) } dataSource={this.state.dataSource} pagination={{onChange:this.onPageChange,pageSize,total,current}}/>
                 {
                     ( (addForm && addForm.length) || (readyUpdateData && readyUpdateData.length))&& <Drawer
                     title={isAdd ? `新增${DrawerName}` :`修改${DrawerName}`}
@@ -323,7 +322,7 @@ class ECCOM extends React.Component{
                                                         <InputNumber {...item} />
                                                     );
                                                     case 'api-select':return (
-                                                        <LazySelect {...item} onSelectChange={this.onFormDataChange}/>
+                                                        <LazySelect {...item} onSelectChange={this.onFormDataChange} />
                                                     );
                                                     case 'tree-select':return(
                                                         <LazyTreeSelect {...item} onSelectChange={this.onFormDataChange}/>
