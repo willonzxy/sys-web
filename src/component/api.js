@@ -1,8 +1,8 @@
 /*
  * @Author: 伟龙-Willon qq:1061258787 
  * @Date: 2019-03-19 10:51:36 
- * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2019-04-18 01:37:27
+ * @Last Modified by: 伟龙
+ * @Last Modified time: 2019-04-18 09:43:05
  */
 /** 组件所用的所有api都收藏于此，统一管理 */
 const baseApi = 'http://localhost:4000',
@@ -46,9 +46,9 @@ export default {
     warn:'/warnconfig',
     power:'/power',
     role:'/role',
-    getCollections:'/dir?p_id=C',
-    getActions:'/dir?p_id=A',
-    getWarnTags:'/dir?p_id=W',
+    getCollections:'/dir?p_id=C&pageSize=1000',
+    getActions:'/dir?p_id=A&pageSize=1000',
+    getWarnTags:'/dir?p_id=W&pageSize=1000',
     table_data_set:'/tabledataset',
     getOwnMenu:'/ownMenu?role=domain',
     getSuperDomainMenu:'/ownMenu?role=super_domain',

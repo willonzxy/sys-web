@@ -10,7 +10,7 @@ const {TabPane} = Tabs;
 const { RangePicker } = DatePicker;
 const dateFormat = 'YYYY/MM/DD';
 const monthFormat = 'YYYY/MM';
-
+const mysqlDateFormat = 'yyyy-mm-dd hh:mm:ss';
 function random(){
     return Math.random() * 255
 }
@@ -66,7 +66,8 @@ export default class Vdata extends React.PureComponent {
     onDateChange = (date,dateString)=>{
         let start = +new Date(date[0]._d),
             end = +new Date(date[1]._d);
-        console.log(start,end)
+        console.log(DateFormat(start,mysqlDateFormat),DateFormat(end,mysqlDateFormat))
+        let d1 = DateFormat(start,mysqlDateFormat),d2 = DateFormat(end,mysqlDateFormat)
         this.setState({
             timeRange:{
                 start,end
@@ -131,7 +132,7 @@ export default class Vdata extends React.PureComponent {
                         this.state.dataSource.map(({data,attr,name})=>{
                             return (
                                 <TabPane tab={name} key={attr}>
-                                    <LineChartWidthBrush data={data} attr={attr}/> 
+                                    <LineChartWidthBrush data={data} attr={attr} /> 
                                 </TabPane>
                             )
                         })

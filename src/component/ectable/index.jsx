@@ -38,7 +38,7 @@ class ECCOM extends React.Component{
                                     case 'A3':return (
                                         <Button  key={item} type="dashed" onClick={this.onReadyUpdate.bind(this,record)}>修改</Button>
                                     );
-                                    case 'A3':return (
+                                    case 'A5':return (
                                         <Button type="default" className="gap-l" onClick={this.gotoDetail.bind(this,record)}>详情</Button>
                                     );
                                     default:return ''

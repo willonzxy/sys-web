@@ -95,7 +95,7 @@ const select = [
  * const EasyTable = ECTable('tablename')
  * <EasyTable cols={cols} api={/usr} addForm={addForm} search={search}/>
  */
-const tableName = 'area';
+const tableName = 'role';
 const EasyTable = ECTable(tableName)
 export default () => {
   return (
