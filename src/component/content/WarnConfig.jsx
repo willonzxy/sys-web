@@ -5,13 +5,13 @@ import API from '../api.js'
 const {getWarnTags,warn} = API;
 const columns = [{
     title: '字典id',
-    dataIndex: "warnconfig_d_id",
-    key: 'warnconfig_d_id'
+    dataIndex: "warn_d_id",
+    key: 'warn_d_id'
   }, 
   {
     title: '指标名称',
-    dataIndex: 'warnconfig_name',
-    key: 'warnconfig_name',
+    dataIndex: 'warn_name',
+    key: 'warn_name',
   }, 
   {
     title:'接收者',
@@ -30,21 +30,21 @@ const columns = [{
   },
   {
     title:'状态',
-    dataIndex:'warnconfig_status',
-    key:'warnconfig_status'
+    dataIndex:'warn_status',
+    key:'warn_status'
   },
   {
     title: '时间',
-    key: 'warnconfig_created_date',
-    dataIndex: 'warnconfig_created_date',
+    key: 'warn_created_date',
+    dataIndex: 'warn_created_date',
     render:(text,record)=>{
-      return (<span>{dateFormat(+record.warnconfig_created_date,'yyyy-mm-dd')}</span>)
+      return (<span>{dateFormat(+record.warn_created_date,'yyyy-mm-dd')}</span>)
     }
   },
   {
     title:'状态',
     key:'changeStatus',
-    attr:'warnconfig_status'
+    attr:'warn_status'
   },
   {
     title: '操作',
@@ -54,7 +54,7 @@ const columns = [{
 ];
 const addForm = [
   {
-    attr:'warnconfig_d_id',
+    attr:'warn_d_id',
     label:'指标名称',
     type:'api-select',
     dataIndex:'d_id',
@@ -102,7 +102,7 @@ const search = [
  * const EasyTable = ECTable('tablename')
  * <EasyTable cols={cols} api={/usr} addForm={addForm} search={search}/>
  */
-const tableName = 'warnsetting';
+const tableName = 'warn';
 const EasyTable = ECTable(tableName)
 export default () => {
   return (

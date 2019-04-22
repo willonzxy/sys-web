@@ -2,7 +2,7 @@
  * @Author: 伟龙-Willon qq:1061258787 
  * @Date: 2019-03-19 10:51:36 
  * @Last Modified by: 伟龙
- * @Last Modified time: 2019-04-18 09:43:05
+ * @Last Modified time: 2019-04-22 21:40:01
  */
 /** 组件所用的所有api都收藏于此，统一管理 */
 const baseApi = 'http://localhost:4000',
@@ -10,12 +10,8 @@ const baseApi = 'http://localhost:4000',
           return baseApi + path
       }
 export default {
-    login:{
-        signOn:{
-            path:'/company/login',
-            method:'post',
-        }
-    },
+    login:'/user/login',
+    companyRegister:"/company",
     register:{
         signIn:{
             path:'/company',
@@ -43,7 +39,7 @@ export default {
         method:'post'
     },
     user:'/user',
-    warn:'/warnconfig',
+    warn:'/warn',
     power:'/power',
     role:'/role',
     getCollections:'/dir?p_id=C&pageSize=1000',
@@ -53,5 +49,6 @@ export default {
     getOwnMenu:'/ownMenu?role=domain',
     getSuperDomainMenu:'/ownMenu?role=super_domain',
     company:'/company',
-    getSession:'/session'
+    getSession:'/session',
+    sensor_data_api:'http://localhost:3001/data',
 }

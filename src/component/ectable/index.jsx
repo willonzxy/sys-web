@@ -100,7 +100,7 @@ class ECCOM extends React.Component{
     gotoDetail = data =>{
         console.log(this.props.props.history)
         this.props.props.history.push({
-          pathname:`/domain/area/vdata/${data._id}`, // 显示区域id的详情页
+          pathname:`/platform/area/vdata/${data._id}`, // 显示区域id的详情页
           state:data
         })
     }

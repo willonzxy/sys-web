@@ -24,13 +24,18 @@ const columns = [{
   },
   {
     title: '公司管理员',
-    dataIndex: 'leader',
-    key: 'leader',
+    dataIndex: 'company_leader',
+    key: 'company_leader',
   },
   {
-    title: '联系方式',
-    dataIndex: 'tel',
-    key: 'tel',
+    title: '公司管理员邮箱',
+    dataIndex: 'company_email',
+    key: 'company_email',
+  },
+  {
+    title: '公司管理员手机',
+    dataIndex: 'company_tel',
+    key: 'company_tel',
   },
   {
     title: '营业执照',
@@ -74,20 +79,26 @@ const addForm = [
     rules:required
   },
   {
-    attr:'leader',
+    attr:'company_leader',
     label:'公司管理员',
     type:'input',
     rules:required
   },
   {
-    attr:'tel',
+    attr:'company_tel',
     label:'联系方式',
     type:'input',
     rules:required
   },
   {
+    attr:'company_email',
+    label:'联系邮箱',
+    type:'input',
+    rules:required
+  },
+  {
     attr:'company_role',
-    label:'角色名称',
+    label:'角色名称列表',
     type:'api-select',
     api:role,
     dataIndex:'_id',

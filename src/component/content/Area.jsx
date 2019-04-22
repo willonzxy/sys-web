@@ -1,8 +1,8 @@
 /*
  * @Author: 伟龙-Willon qq:1061258787 
  * @Date: 2019-03-18 17:07:55 
- * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2019-04-18 01:50:16
+ * @Last Modified by: 伟龙
+ * @Last Modified time: 2019-04-18 22:08:37
  */
 import React from 'react'
 import '../../css/area.css'
@@ -25,11 +25,12 @@ const columns = [{
     dataIndex:'area_pic',
     key:'area_pic',
     type:'pic'
-  },{
-    title: '传感器列表',
-    dataIndex: 'sensor_list',
-    key: 'sensor_list',
   },
+  // {
+  //   title: '传感器列表',
+  //   dataIndex: 'sensor_list',
+  //   key: 'sensor_list',
+  // },
   {
     title: '备注',
     dataIndex: 'area_desc',
@@ -58,7 +59,7 @@ const columns = [{
       attr:'sensor_list',
       type:'api-select',
       rules:antd_table_required,
-      api:`${dir}?p_id=W`,
+      api:`${dir}?p_id=S`,
       dataIndex:'d_id',
       show:'dir_name',
       label:'检测指标',

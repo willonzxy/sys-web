@@ -1,8 +1,8 @@
 /*
  * @Author: 伟龙-Willon qq:1061258787 
  * @Date: 2019-03-19 15:34:54 
- * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2019-04-17 10:41:39
+ * @Last Modified by: 伟龙
+ * @Last Modified time: 2019-04-22 21:40:50
  */
 import React from 'react';
 import { Link } from 'react-router-dom';
@@ -11,8 +11,9 @@ import {
     Form, Input, Tooltip, Icon, Select, Button, AutoComplete, Upload,message
 } from 'antd';
 import API from '../api.js';
-import md5 from 'md5'
-const { upload,register } = API;
+//import md5 from 'md5'
+import _fetch from '../../tool/fetch.js'
+const { upload,companyRegister } = API;
 const { Option } = Select;
 const AutoCompleteOption = AutoComplete.Option;
 
@@ -39,19 +40,14 @@ class RegistrationForm extends React.Component {
       if (!err) {
         if(data.licence.file.response.status === 1){
           data.licence = data.licence.file.response.path
-          data.password = md5(data.password)
-          let { signIn:{path:url,method} } = register;
-          fetch(url,{
-            method,
-            body:JSON.stringify(data),
-            headers: {
-            'Content-Type': 'application/json'
-          }})
+          //data.password = md5(data.password)
+          //let { signIn:{path:url,method} } = register;
+          _fetch.post(companyRegister,data)
           .then(res=>res.json())
           .then(res=>{
             console.log(res)
             if(res.status === 1){
-              message.success('注册成功')
+              message.success('注册成功，等待平台管理审核')
               this.props.history.push({
                 pathname:'/',
                 params:{
@@ -144,7 +140,7 @@ class RegistrationForm extends React.Component {
           <Link to="/"><div className="bar">登录</div></Link>
           <div className="register-box">
             <div className="left-side">
-              <h1>注册使用</h1>
+              <h1>平台注册使用</h1>
               <div className="container">
                 <div className="item-a"></div>
                 <div className="item-b"></div>
@@ -156,29 +152,8 @@ class RegistrationForm extends React.Component {
             <div className="input-group">
               <div className="platform-name">IOT<sup>TM</sup></div>
               <Form {...formItemLayout} onSubmit={this.handleSubmit}>
-                <Form.Item
-                  label="负责人电话"
-                >
-                  {getFieldDecorator('tel', {
-                    rules: [{ required: true, message: '填入联系人电话!' }],
-                  })(
-                    <Input addonBefore={prefixSelector} style={{ width: '100%' }} />
-                  )}
-                </Form.Item>
-                <Form.Item
-                  label={(
-                    <span>
-                      公司负责人
-                    </span>
-                  )}
-                >
-                  {getFieldDecorator('leader', {
-                    rules: [{ required: true, message: '公司负责人名称!', whitespace: true }],
-                  })(
-                    <Input />
-                  )}
-                </Form.Item>
-                <Form.Item
+                
+                {/* <Form.Item
                   label="密码"
                 >
                   {getFieldDecorator('password', {
@@ -203,7 +178,7 @@ class RegistrationForm extends React.Component {
                   })(
                     <Input type="password" onBlur={this.handleConfirmBlur} />
                   )}
-                </Form.Item>
+                </Form.Item> */}
                 <Form.Item
                   label="公司名称"
                 >
@@ -224,6 +199,37 @@ class RegistrationForm extends React.Component {
                     }],
                   })(
                     <Input />
+                  )}
+                </Form.Item>
+                <Form.Item
+                  label={(
+                    <span>
+                      公司联系人
+                    </span>
+                  )}
+                >
+                  {getFieldDecorator('company_leader', {
+                    rules: [{ required: true, message: '公司负责人名称!', whitespace: true }],
+                  })(
+                    <Input />
+                  )}
+                </Form.Item>
+                <Form.Item
+                  label="联系人手机"
+                >
+                  {getFieldDecorator('company_tel', {
+                    rules: [{ required: true, message: '填入联系人电话!' }],
+                  })(
+                    <Input addonBefore={prefixSelector} style={{ width: '100%' }} />
+                  )}
+                </Form.Item>
+                <Form.Item
+                  label="联系人邮箱"
+                >
+                  {getFieldDecorator('company_email', {
+                    rules: [{ required: true, message: '填入联系人邮箱!' }],
+                  })(
+                    <Input style={{ width: '100%' }} />
                   )}
                 </Form.Item>
                 <Form.Item
@@ -254,7 +260,7 @@ class RegistrationForm extends React.Component {
               </Form>
             </div>
         </div>
-        <footer className="footer">IOT System ©2019 Created by Willon</footer>
+        <footer className="footer">IOT System ©2019 Created by Willon（伟龙）</footer>
       </div>
       
     );

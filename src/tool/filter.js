@@ -1,8 +1,8 @@
 /** 过滤拦截 */
 // {
 //     title: '指标名称',
-//     dataIndex: 'warnconfig_name',
-//     key: 'warnconfig_name',
+//     dataIndex: 'warn_name',
+//     key: 'warn_name',
 //   }, 
 // {
 //     title: '操作',
