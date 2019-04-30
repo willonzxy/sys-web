@@ -7,13 +7,14 @@ import _fetch from '../../tool/fetch.js'
 import filter from '../../tool/filter.js'
 import qs from 'querystring'
 import dateFormat from 'dateformat'
+import BaiduMap from '../map/index.jsx'
 import './index.css'
 const {TextArea} = Input;
 const {Option} = Switch;
 
 const lay = {
-    labelCol: { span: 8 },
-    wrapperCol: { span: 14 },
+    labelCol: { span: 6 },
+    wrapperCol: { span: 18 },
 }
 class ECCOM extends React.Component{
     constructor(){
@@ -73,6 +74,7 @@ class ECCOM extends React.Component{
             isAdd:true,
             total:0,
             current:0,
+            map:'',
             actions,
             DrawerName,
             searchForm, // 搜索配置
@@ -123,9 +125,21 @@ class ECCOM extends React.Component{
                         }else{
                             data[item.attr] = data[item.attr].file.response.path
                         }
-                        
                     }
                 })
+                
+                if(this.state.addForm.some(i=>i.type=='map')){
+                    let map = this.state.map;
+                    let site = this.refs.site.value;
+                    console.log(map,site)
+                    if(map && site){
+                        console.log('带上坐标')
+                        data = {...data,...map,site}
+                        console.log(data)
+                    }else{
+                        return message.error('错误❌地址坐标为空')
+                    }
+                } 
                 let {api,isAdd,readyUpdateData} = this.state,p1 = null;
                 if(!isAdd){
                     api = `${api}/${readyUpdateData._id}`;
@@ -191,6 +205,7 @@ class ECCOM extends React.Component{
         })
     }
     changeState = (attr,value) =>{
+        console.log(attr,value)
         this.setState({
             [attr]:value
         })
@@ -221,7 +236,8 @@ class ECCOM extends React.Component{
 
     render(){
     const { cols,searchForm,searchFormData,DrawerName,addForm,readyUpdateData,isAdd,total,current,pageSize,actions} = this.state;
-    const { getFieldDecorator } = this.props.form;
+    const { width,form } = this.props;
+    const { getFieldDecorator } = form;
         return (
             <div className="warehouse">
             {
@@ -271,12 +287,12 @@ class ECCOM extends React.Component{
                     closable={false}
                     onClose={this.changeDrawerState}
                     visible={this.state.visible}
-                    width='400px'
+                    width={width || '400px'}
                 >
                     <Form onSubmit={this.handleSubmit} className="addForm" layout="horizontal">
                     {
                         addForm.map(item=>{
-                            var {attr='',initialValue="",rules,type,label,dataIndex} = item;
+                            var {attr='',site='',initialValue="",rules,type,label,dataIndex} = item;
                             if(type === "action"){
                                 return (
                                     <Form.Item
@@ -295,6 +311,33 @@ class ECCOM extends React.Component{
                                         
                                     </Form.Item>
                                 )
+                            }else if(type === "map"){
+                                return(
+                                    <div >
+                                        {/* <div id="r-result">请输入:<input type="text" id="suggestId" ref='search' size="20" style={{width:'150px'}} /></div> */}
+                                        <div className="ant-row ant-form-item">
+                                            <div className="ant-col-6 ant-form-item-label">
+                                                <label htmlFor="suggestId" className="ant-form-item-required" title="地址">{label}</label>
+                                            </div>
+                                            <div className="ant-col-18 ant-form-item-control-wrapper">
+                                                <div className='ant-form-item-control'>
+                                                    <input id="suggestId" className="ant-input" value={readyUpdateData[attr]} ref="site"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="ant-row ant-form-item">
+                                            <div className="ant-col-6 ant-form-item-label">
+                                                {/* <label for="suggestId" class="ant-form-item-required" title="地址">{label}</label> */}
+                                            </div>
+                                            <div className="ant-col-18 ant-form-item-control-wrapper">
+                                                <div className='ant-form-item-control'>
+                                                    <BaiduMap attr='map' onSiteChange={this.changeState} readyValue={readyUpdateData[attr]}/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="searchResultPanel" style={{border:'1px solid #C0C0C0',width:'150px',height:'auto', display:'none'}}></div>                                                            
+                                    </div>
+                                );
                             }else{
                               
                                 return (

@@ -72,11 +72,16 @@ const addForm = [
     type:'input',
     rules:required
   },
+  // {
+  //   attr:'site',
+  //   label:'地址',
+  //   type:'input',
+  //   rules:required
+  // },
   {
     attr:'site',
+    type:'map',
     label:'地址',
-    type:'input',
-    rules:required
   },
   {
     attr:'company_leader',
@@ -97,7 +102,14 @@ const addForm = [
     rules:required
   },
   {
-    attr:'company_role',
+    attr:'licence',
+    label:'头像',
+    type:'uploader',
+    api:upload.path,
+    scene_id:'licence',
+  },
+  {
+    attr:'company_role_list',
     label:'角色名称列表',
     type:'api-select',
     api:role,
@@ -136,6 +148,7 @@ export default () => {
   return (
     <EasyTable
       DrawerName={'公司'}
+      width={'600px'}
       cols={columns}
       api={company}
       searchForm={search}

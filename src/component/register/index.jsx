@@ -2,7 +2,7 @@
  * @Author: 伟龙-Willon qq:1061258787 
  * @Date: 2019-03-19 15:34:54 
  * @Last Modified by: 伟龙
- * @Last Modified time: 2019-04-22 21:40:50
+ * @Last Modified time: 2019-04-23 14:51:54
  */
 import React from 'react';
 import { Link } from 'react-router-dom';
@@ -43,7 +43,6 @@ class RegistrationForm extends React.Component {
           //data.password = md5(data.password)
           //let { signIn:{path:url,method} } = register;
           _fetch.post(companyRegister,data)
-          .then(res=>res.json())
           .then(res=>{
             console.log(res)
             if(res.status === 1){

@@ -1,8 +1,9 @@
 import React from 'react'
 import ECTable from '../ectable/index.jsx'
 import dateFormat from 'dateformat';
+import {antd_table_required} from '../../tool/map.js'
 import API from '../api.js'
-const {getWarnTags,warn} = API;
+const {getWarnTags,warn,area,dev,user} = API;
 const columns = [{
     title: '字典id',
     dataIndex: "warn_d_id",
@@ -49,10 +50,28 @@ const columns = [{
   {
     title: '操作',
     key: 'action',
-    actions:['delete','update']
+    actions:['A2','A3','A1','A4']
   }
 ];
 const addForm = [
+  {
+    attr:'warn_area_id',
+    label:'区域名称',
+    type:'api-select',
+    dataIndex:'_id',
+    show:'area_name',
+    api:area,
+    rules:antd_table_required
+  },
+  {
+    attr:'warn_dev_id',
+    label:'设备名称',
+    type:'api-select',
+    dataIndex:'dev_id',
+    show:'dev_name',
+    api:dev,
+    rules:antd_table_required
+  },
   {
     attr:'warn_d_id',
     label:'指标名称',
@@ -60,29 +79,34 @@ const addForm = [
     dataIndex:'d_id',
     show:'dir_name',
     api:getWarnTags,
-    rules:[{
-      required:true,
-      message:'please insert'
-    }]
+    rules:antd_table_required
   },
   {
-    attr:'threshold',
-    label:'阈值',
+    attr:'min_val',
+    label:'阈值下限',
     type:'number',
-    rules:[{
-      required:true,
-      message:'please insert '
-    }]
+    rules:antd_table_required
   },
   {
-    attr:'msg',
-    label:'预警信息',
-    type:'textarea',
+    attr:'max_val',
+    label:'阈值上限',
+    type:'number',
+    rules:antd_table_required
   },
   {
     attr:'receive',
     label:'接收者',
-    type:'input',
+    type:'api-select',
+    dataIndex:'_id',
+    show:'user_name',
+    api:user,
+    mode:"multiple",
+    rules:antd_table_required
+  },
+  {
+    attr:'msg',
+    label:'备注信息',
+    type:'textarea',
   },
   {
     type:'action',
@@ -107,7 +131,7 @@ const EasyTable = ECTable(tableName)
 export default () => {
   return (
     <EasyTable 
-      DrawerName={'新增指标监控'}
+      DrawerName={'指标监控'}
       cols={columns} 
       tableName={tableName}
       api={warn}

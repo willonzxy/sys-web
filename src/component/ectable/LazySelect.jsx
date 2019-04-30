@@ -12,7 +12,13 @@ export default class LazySelect extends React.PureComponent {
         }
     }
     componentDidMount(){
+        this.getData()
+    }
+    getData = (followAttr,followValue)=>{
         let { attr,api,label} = this.props;
+        if(followAttr){
+            api = `${api}?${followAttr}=${followValue}`
+        }
         _fetch.get(api)
         .then(res=>{
             if(res.status === 1){
@@ -22,6 +28,10 @@ export default class LazySelect extends React.PureComponent {
             }
             message.warn(`获取${label}数据失败`)
         })
+    }
+    componentWillReceiveProps(props){
+        let { followAttr,followValue } = props;
+        console.log(followAttr,followValue)
     }
     onChange = (val)=>{
         let {onSelectChange,attr} = this.props;
@@ -35,7 +45,7 @@ export default class LazySelect extends React.PureComponent {
         onSelectChange(attr,val)
     }
     render(){
-        let {attr,show,dataIndex,mode,defaultValue} = this.props
+        let {attr,show,dataIndex,mode,defaultValue,} = this.props
         return (
             <Select 
                 onChange={this.onChange}

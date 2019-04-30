@@ -2,7 +2,7 @@
  * @Author: 伟龙-Willon qq:1061258787 
  * @Date: 2019-03-18 20:10:58 
  * @Last Modified by: 伟龙
- * @Last Modified time: 2019-04-22 22:24:06
+ * @Last Modified time: 2019-04-23 16:00:56
  */
 
 /* content页的路由 */
@@ -10,7 +10,7 @@ import Dir from '../content/Dir.jsx'
 import PowerCtrl from "../content/PowerCtrl.jsx";
 import Company from '../content/Company.jsx'
 import RoleCtrl from '../content/RoleCtrl.jsx'
-
+import Dev from '../content/Dev.jsx'
 import Area from "../content/Area.jsx";
 import Warehouse from '../content/Warehouse.jsx'
 import Vdata from '../content/Vdata.jsx'
@@ -44,6 +44,11 @@ export default [
         exact:true,
         component:UserCtrl
     },
+    {
+        path:base + '/dev',
+        exact:true,
+        component:Dev
+    },
 
 
     // ----- 以下是非平台管理员的路由 -----
@@ -66,10 +71,5 @@ export default [
         path:base + '/warn',
         exact:true,
         component:WarnConfig
-    },
-    {
-        path:base + '/userctrl',
-        exact:true,
-        component:UserCtrl
-    },
+    }
 ]

@@ -1,7 +1,8 @@
 import React from 'react'
 import ECTable from '../ectable/index.jsx'
 import API from '../api.js'
-const {role,upload,user} = API
+import md5 from 'md5'
+const {platformRole,upload,user,company} = API
 /**  
  * 
  * company_id:{type:String,required:true},
@@ -43,7 +44,7 @@ const columns = [{
   {
     title: '操作',
     key: 'action',
-    actions:['delete','update']
+    actions:['A1','A2','A3','A4']
   }
 ];
 
@@ -54,14 +55,20 @@ const required = [{
 
 const addForm = [
   {
+    attr:'user_name',
+    label:'姓名',
+    type:'input',
+    rules:required
+  },
+  {
     attr:'tel',
     label:'电话',
     type:'input',
     rules:required
   },
   {
-    attr:'user_name',
-    label:'姓名',
+    attr:'email',
+    label:'邮箱',
     type:'input',
     rules:required
   },
@@ -73,12 +80,21 @@ const addForm = [
     scene_id:'user',
   },
   {
-    attr:'role_id',
-    label:'角色名称',
+    attr:'user_role_name',
+    label:'平台角色',
     type:'api-select',
-    api:role,
+    api:platformRole,
+    dataIndex:'d_id',
+    show:'dir_name',
+    rules:required
+  },
+  {
+    attr:'user_company_id',
+    label:'公司名称',
+    type:'api-select',
+    api:company,
     dataIndex:'_id',
-    show:'role_name',
+    show:'company_name',
     rules:required
   },
   {
@@ -111,7 +127,7 @@ const EasyTable = ECTable(tableName)
 export default () => {
   return (
     <EasyTable
-      DrawerName={'新增人员'}
+      DrawerName={'人员'}
       cols={columns}
       tableName={tableName}
       api={user}

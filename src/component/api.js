@@ -2,7 +2,7 @@
  * @Author: 伟龙-Willon qq:1061258787 
  * @Date: 2019-03-19 10:51:36 
  * @Last Modified by: 伟龙
- * @Last Modified time: 2019-04-22 21:40:01
+ * @Last Modified time: 2019-04-23 16:35:59
  */
 /** 组件所用的所有api都收藏于此，统一管理 */
 const baseApi = 'http://localhost:4000',
@@ -44,11 +44,13 @@ export default {
     role:'/role',
     getCollections:'/dir?p_id=C&pageSize=1000',
     getActions:'/dir?p_id=A&pageSize=1000',
-    getWarnTags:'/dir?p_id=W&pageSize=1000',
+    getWarnTags:'/dir?p_id=S&pageSize=1000',
     table_data_set:'/tabledataset',
     getOwnMenu:'/ownMenu?role=domain',
     getSuperDomainMenu:'/ownMenu?role=super_domain',
     company:'/company',
     getSession:'/session',
     sensor_data_api:'http://localhost:3001/data',
+    platformRole:'/dir?p_id=R&pageSize=1000',
+    dev:'/dev'
 }

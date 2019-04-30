@@ -12,11 +12,12 @@ body{
     position: absolute;
     top:50%;
     left:50%;
-    transform: translate(-50%,-50%);
+    /* transform: translate(-120%,-50%); */
+    /* transform: translateY(-50%); */
     display: flex;
     justify-content: space-around;
     align-items: center;
-    animation: slider .5s ease-in-out;
+    animation: slider .4s ease-out forwards;
 }
 .register-box .platform-name{
     color: #333;
@@ -32,7 +33,7 @@ body{
     letter-spacing: 5px;
 }
 .bg .bar{
-    position: absolute;
+    position: fixed;
     top:-70px;
     right:0px;
     transform: rotate(-45deg);
@@ -114,10 +115,22 @@ body{
 }
 
 @keyframes slider {
-    0%{
-        transform: translate(-100%,-50%)
+    from{
+        transform: translate(-120%,-50%);
     }
-    100%{
+    /* 20%{
+        transform: translate(-90%,-50%)
+    }
+    40%{
+        transform: translate(-80%,-50%)
+    }
+    60%{
+        transform: translate(-70%,-50%)
+    }
+    80%{
+        transform: translate(-60%,-50%)
+    } */
+    to{
         transform: translate(-50%,-50%)
     }
 }

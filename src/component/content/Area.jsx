@@ -2,7 +2,7 @@
  * @Author: 伟龙-Willon qq:1061258787 
  * @Date: 2019-03-18 17:07:55 
  * @Last Modified by: 伟龙
- * @Last Modified time: 2019-04-18 22:08:37
+ * @Last Modified time: 2019-04-23 15:44:41
  */
 import React from 'react'
 import '../../css/area.css'
@@ -45,7 +45,7 @@ const columns = [{
   },{
     title: '操作',
     key: 'action',
-    actions:['detail','delete','update']
+    actions:['A1','A2','A3','A4','A5']
   }]
 
   const addForm = [
@@ -54,16 +54,6 @@ const columns = [{
       attr:'area_name',
       type:'input',
       rules:antd_table_required,
-    },
-    {
-      attr:'sensor_list',
-      type:'api-select',
-      rules:antd_table_required,
-      api:`${dir}?p_id=S`,
-      dataIndex:'d_id',
-      show:'dir_name',
-      label:'检测指标',
-      mode:"multiple"
     },
     {
       attr:'area_pic',
