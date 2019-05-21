@@ -2,7 +2,7 @@
  * @Author: 伟龙-Willon qq:1061258787 
  * @Date: 2019-03-19 10:51:36 
  * @Last Modified by: 伟龙
- * @Last Modified time: 2019-04-23 16:35:59
+ * @Last Modified time: 2019-05-10 20:21:28
  */
 /** 组件所用的所有api都收藏于此，统一管理 */
 const baseApi = 'http://localhost:4000',
@@ -52,5 +52,6 @@ export default {
     getSession:'/session',
     sensor_data_api:'http://localhost:3001/data',
     platformRole:'/dir?p_id=R&pageSize=1000',
-    dev:'/dev'
+    dev:'/dev',
+    msg:'/msg',
 }

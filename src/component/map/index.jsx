@@ -2,10 +2,9 @@
  * @Author: willon 伟龙 
  * @Date: 2019-04-27 14:18:10 
  * @Last Modified by: 伟龙
- * @Last Modified time: 2019-05-01 01:29:48
+ * @Last Modified time: 2019-05-11 18:53:15
  */
 import React, { PureComponent } from 'react';
-import {Input} from 'antd';
 import '../map/index.css'
 let BMap = window.BMap;
 export default class BaiduMap extends PureComponent{
@@ -17,21 +16,19 @@ export default class BaiduMap extends PureComponent{
         function G(id) {
             return document.getElementById(id);
         }
-        
         var map = new BMap.Map("l-map");
         if(that.props.readyValue){
             let pp = that.props.readyValue;
-            console.log(pp)
             map.centerAndZoom(pp, 18);
             map.addOverlay(new BMap.Marker(pp));    //添加标注
         }else{
             map.centerAndZoom("广州",12);                   // 初始化地图,设置城市和地图级别。
         }
-        var ac = new BMap.Autocomplete(    //建立一个自动完成的对象
+        var ac = G("suggestId") && new BMap.Autocomplete(    //建立一个自动完成的对象
             {"input" : "suggestId"
             ,"location" : map
         });
-        ac.addEventListener("onhighlight", function(e) {  //鼠标放在下拉列表上的事件
+        G("searchResultPanel") && ac.addEventListener("onhighlight", function(e) {  //鼠标放在下拉列表上的事件
         var str = "";
             var _value = e.fromitem.value;
             var value = "";
@@ -50,7 +47,7 @@ export default class BaiduMap extends PureComponent{
         });
     
         var myValue;
-        ac.addEventListener("onconfirm", function(e) {    //鼠标点击下拉列表后的事件
+        G("searchResultPanel") && ac.addEventListener("onconfirm", function(e) {    //鼠标点击下拉列表后的事件
         var _value = e.item.value;
             myValue = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
             G("searchResultPanel").innerHTML ="onconfirm<br />index = " + e.item.index + "<br />myValue = " + myValue;
@@ -60,10 +57,12 @@ export default class BaiduMap extends PureComponent{
         function setPlace(){
             map.clearOverlays();    //清除地图上所有覆盖物
             function myFun(){
+                let site = local.getResults().getPoi(0).site;
                 let pp = local.getResults().getPoi(0).point;    //获取第一个智能搜索的结果
                 let { lat,lng } = pp; // 纬度、经度
                 let { attr,onSiteChange } = that.props;
                 onSiteChange(attr,pp);
+                //onSiteChange('site',site);
                 map.centerAndZoom(pp, 18);
                 map.addOverlay(new BMap.Marker(pp));    //添加标注
             }
@@ -76,7 +75,7 @@ export default class BaiduMap extends PureComponent{
     render(){
         return (
             <div>
-                <div id="l-map" style={{height:'300px'}}></div>
+                <div id="l-map" style={{width:'100%',minHeight:'250px',height:'100%'}}></div>
             </div>
         )
     }

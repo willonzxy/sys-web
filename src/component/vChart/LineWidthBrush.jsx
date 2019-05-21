@@ -83,7 +83,7 @@ function getComponent(data,attr) {
       return (
         <div>
           <Chart
-            height={window.innerHeight * (2 / 5)}
+            height={window.innerHeight * (3 / 5)}
             data={dv}
             padding={[30, 20, 20, 80]}
             scale={scale1}
@@ -100,10 +100,9 @@ function getComponent(data,attr) {
             />
           </Chart>
           <Chart
-            
             height={window.innerHeight * (1 / 8)}
             data={data}
-            padding={[10, 20, 20, 80]}
+            padding={[30, 20, 20, 80]}
             scale={scale2}
             onGetG2Instance={g2Chart => {
               chart2 = g2Chart;

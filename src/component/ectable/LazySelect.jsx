@@ -20,7 +20,7 @@ export default class LazySelect extends React.PureComponent {
             api = `${api}?${followAttr}=${followValue}`
         }
         _fetch.get(api)
-        .then(res=>{
+        .then((res={})=>{
             if(res.status === 1){
                 return this.setState({
                     [attr+'_list']:res.data.list,
@@ -42,15 +42,16 @@ export default class LazySelect extends React.PureComponent {
         this.setState({
             value:val
         })
-        onSelectChange(attr,val)
+        onSelectChange && onSelectChange(attr,val)
     }
     render(){
-        let {attr,show,dataIndex,mode,defaultValue,} = this.props
+        let {attr,show,dataIndex,mode,defaultValue,...rest} = this.props
         return (
             <Select 
                 onChange={this.onChange}
                 mode={mode}
-                defaultValue={defaultValue}
+                defaultValue={defaultValue || this.state[attr+'_list'][0]}
+                {...rest}
             >
                 {
                     this.state[attr+'_list'] && this.state[attr+'_list'].map((data,index)=>{

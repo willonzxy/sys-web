@@ -2,7 +2,7 @@
  * @Author: 伟龙-Willon qq:1061258787 
  * @Date: 2019-03-18 14:41:51 
  * @Last Modified by: 伟龙
- * @Last Modified time: 2019-04-30 20:26:50
+ * @Last Modified time: 2019-05-08 23:02:33
  */
 import React from 'react'
 import {Layout, Menu, Icon,message} from 'antd'
@@ -33,10 +33,12 @@ class DomainLayout extends React.Component {
                 if(res.status === 1){
                     message.success('拉取用户菜单数据')
                     role = res.session.role;
+                    window.__ROLE__ = role;
                     tel = res.session.user.tel;
                     user_name = res.session.user.user_name;
                     user_company_name = res.session.user.user_company_name;
                 }else{
+                    message.warn(res.msg)
                     this.props.history.push({
                         pathname:'/'
                     })
@@ -46,13 +48,24 @@ class DomainLayout extends React.Component {
             })
             .then(res=>{
                 console.log(res)
-                this.setState({
-                    ownMenu:res.menu || res,
-                    tel,
-                    role,
-                    user_company_name,
-                    user_name,
-                })
+                if(res.status === 1){
+                    this.setState({
+                        ownMenu:res.menu,
+                        tel,
+                        role,
+                        user_company_name,
+                        user_name,
+                    })
+                }else{
+                    message.warn(res.msg)
+                    this.setState({
+                        ownMenu:[],
+                        tel,
+                        role,
+                        user_company_name,
+                        user_name,
+                    })
+                }
             })
         } catch(e){
             message.warn('请登陆')

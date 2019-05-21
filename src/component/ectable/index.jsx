@@ -33,11 +33,11 @@ class ECCOM extends React.Component{
                                 switch(item){
                                     case 'A2':return (
                                             <Popconfirm key={item} title="Are you sure delete this info?" onConfirm={this.del.bind(this,record._id)} okText="Yes" cancelText="No">
-                                                <Button type="danger">删除</Button>
+                                                <Button type="danger" disabled={record.user_role_name&&record.user_role_name===window.__ROLE__}>删除</Button>
                                             </Popconfirm>
                                     );
                                     case 'A3':return (
-                                        <Button  key={item} type="dashed" onClick={this.onReadyUpdate.bind(this,record)}>修改</Button>
+                                        <Button  key={item} type="dashed" onClick={this.onReadyUpdate.bind(this,record)} disabled={record.user_role_name&&record.user_role_name===window.__ROLE__}>修改</Button>
                                     );
                                     case 'A5':return (
                                         <Button type="default" className="gap-l" onClick={this.gotoDetail.bind(this,record)}>详情</Button>
@@ -58,9 +58,9 @@ class ECCOM extends React.Component{
             }
             if(item.key === 'changeStatus'){
                 item.render = (text,record)=>{
-                    let {_id} = record;
+                    let {_id,user_role_name} = record;
                     return (
-                        <Switch key={_id} onChange={this.onChangeStatus.bind(this,_id,record[item.attr],item.attr)} checked={!!(+record[item.attr])}/>
+                        <Switch key={_id} onChange={this.onChangeStatus.bind(this,_id,record[item.attr],item.attr)} checked={!!(+record[item.attr])} disabled={user_role_name&&user_role_name===window.__ROLE__}/>
                     );
                 }
             }
@@ -173,6 +173,7 @@ class ECCOM extends React.Component{
         .then(res => {
             if(res.status === 1){
                 let {list,numTotal,currentPage,pageSize} = res.data;
+                console.log(numTotal)
                 return this.setState({
                     dataSource:list,
                     total:numTotal,
@@ -187,7 +188,6 @@ class ECCOM extends React.Component{
         this.props.form.resetFields()
     }
     onReadyUpdate = (data) =>{
-       
         this.setState({
             readyUpdateData:data,
             isAdd:false,
@@ -321,7 +321,7 @@ class ECCOM extends React.Component{
                                             </div>
                                             <div className="ant-col-18 ant-form-item-control-wrapper">
                                                 <div className='ant-form-item-control'>
-                                                    <input id="suggestId" className="ant-input" value={readyUpdateData[attr]} ref="site"/>
+                                                    <input id="suggestId" className="ant-input" value={this.state[attr] && readyUpdateData[site]} ref="site" />
                                                 </div>
                                             </div>
                                         </div>

@@ -2,7 +2,7 @@
  * @Author: 伟龙-Willon qq:1061258787 
  * @Date: 2019-03-18 17:07:55 
  * @Last Modified by: 伟龙
- * @Last Modified time: 2019-04-22 22:48:54
+ * @Last Modified time: 2019-05-08 14:50:13
  */
 import React from 'react';
 import {
@@ -23,7 +23,7 @@ class NormalLoginForm extends React.Component {
         e.preventDefault();
         this.props.form.validateFields((err, {remember,...data}) => {
             if (!err) {
-                console.log('Received values of form: ', data);
+                // console.log('Received values of form: ', data);
                 //let {path:url,method} = login.signOn;
                 data.password = md5(data.password);
                 _fetch.post(login,data)
@@ -37,7 +37,7 @@ class NormalLoginForm extends React.Component {
                               tel:data.tel,
                               role:user_role_name,
                             }
-                          })
+                        })
                     }else{
                         message.error('登陆失败')
                     }

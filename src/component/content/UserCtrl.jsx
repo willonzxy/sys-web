@@ -2,7 +2,7 @@ import React from 'react'
 import ECTable from '../ectable/index.jsx'
 import API from '../api.js'
 import md5 from 'md5'
-const {platformRole,upload,user,company} = API
+const {platformRole,upload,user,company,role} = API
 /**  
  * 
  * company_id:{type:String,required:true},
@@ -78,6 +78,16 @@ const addForm = [
     type:'uploader',
     api:upload.path,
     scene_id:'user',
+  },
+  {
+    attr:'role_list',
+    label:'角色名称列表',
+    type:'api-select',
+    api:role,
+    dataIndex:'_id',
+    show:'role_name',
+    mode:"multiple"
+    //rules:required
   },
   {
     attr:'user_role_name',

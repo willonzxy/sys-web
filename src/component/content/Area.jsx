@@ -2,7 +2,7 @@
  * @Author: 伟龙-Willon qq:1061258787 
  * @Date: 2019-03-18 17:07:55 
  * @Last Modified by: 伟龙
- * @Last Modified time: 2019-04-23 15:44:41
+ * @Last Modified time: 2019-05-11 18:17:29
  */
 import React from 'react'
 import '../../css/area.css'
@@ -13,13 +13,9 @@ import dateFormat from 'dateformat'
 const {area,upload,dir} = API;
 
 const columns = [{
-    title: '区域id',
-    dataIndex: '_id',
-    key: '_id'
-  }, {
-    title: '区域名',
+    title: '区域名称',
     dataIndex: 'area_name',
-    key: 'area_name',
+    key: 'area_name'
   },{
     title:'缩略图',
     dataIndex:'area_pic',

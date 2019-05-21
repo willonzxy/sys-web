@@ -4,26 +4,42 @@ import dateFormat from 'dateformat';
 import {antd_table_required} from '../../tool/map.js'
 import API from '../api.js'
 const {getWarnTags,warn,area,dev,user} = API;
-const columns = [{
-    title: '字典id',
-    dataIndex: "warn_d_id",
-    key: 'warn_d_id'
+const columns = [
+  {
+    title: '设备区域',
+    dataIndex: 'warn_area_name',
+    key: 'warn_area_name',
+  }, 
+  {
+    title: '设备名称',
+    dataIndex: 'warn_dev_name',
+    key: 'warn_dev_name',
   }, 
   {
     title: '指标名称',
-    dataIndex: 'warn_name',
-    key: 'warn_name',
+    dataIndex: 'warn_dir_name',
+    key: 'warn_dir_name',
   }, 
   {
-    title:'接收者',
-    dataIndex:'receive',
-    key:'receive'
+    title: '上限',
+    dataIndex: 'max_val',
+    key: 'max_val',
   },
   {
-    title: '阈值',
-    dataIndex: 'threshold',
-    key: 'threshold',
+    title: '下限',
+    dataIndex: 'min_val',
+    key: 'min_val',
   },
+  {
+    title: '单位',
+    dataIndex: 'unit',
+    key: 'unit',
+  },
+  {
+    title: '订阅人',
+    dataIndex: "receive_name_list",
+    key: 'receive_name_list'
+  }, 
   {
     title:'预警通知',
     dataIndex:'msg',
