@@ -1,0 +1,52 @@
+.area-item-box{
+    display: flex;
+    flex-wrap: wrap;
+}
+.area-item-box .ant-card{
+    margin:5px;
+    cursor: pointer;
+}
+.area .ant-input-affix-wrapper {
+    width:200px;
+}
+.area .gap-l {
+    margin-left: 10px;
+}
+.area .gap-t{
+    margin-top: 10px;
+}
+.area .ant-form-item-label{
+    text-align: right;
+}
+.ant-btn-danger {
+    background-color:#fff !important;
+}
+.ant-btn-danger:hover{
+    background-color: #f5222d !important;
+    color:#fff !important;
+}
+
+/* .area-item-box .item{
+    box-sizing: border-box;
+    flex: 1;
+    padding: 25px 15px;
+    border-radius: 5px;
+    margin: 5px;
+    max-width: 250px;
+    color:#fff;
+    font-size:20px;
+    letter-spacing: 5px;
+    text-align: center;
+    background: #009EFB;
+    transition: all .3s;
+    box-shadow: 0 2px 8px rgba(84, 48, 132, 0.1);
+}
+.area-item-box .item:hover{
+    cursor: pointer;
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(84, 48, 132, 0.06);
+}
+
+.gap{
+    margin: 10px;
+} */

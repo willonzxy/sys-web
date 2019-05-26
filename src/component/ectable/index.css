@@ -1,0 +1,14 @@
+.btn-group-gap button:nth-child(n+2) , .ant-input-affix-wrapper:nth-child(n+2){
+    margin-left: 10px;
+}
+.addForm button:nth-child(n+2){
+    margin-left: 10px;
+}
+.search-tools{
+    display: flex;
+    justify-content: flex-start;
+    align-items:center;
+}
+.search-tools .gap{
+    margin-left: 10px;
+}

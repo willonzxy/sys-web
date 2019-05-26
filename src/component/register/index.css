@@ -1,0 +1,139 @@
+::-webkit-scrollbar{
+    display:none;
+}
+body{
+    position: relative;
+    min-width: 960px;
+}
+#root{
+    height: 100%;
+}
+.register-box {
+    position: absolute;
+    top:50%;
+    left:50%;
+    /* transform: translate(-120%,-50%); */
+    /* transform: translateY(-50%); */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    animation: slider .4s ease-out forwards;
+}
+.register-box .platform-name{
+    color: #333;
+}
+.bg{
+    position: relative;
+    height: inherit;
+    /* height: inherit;
+    background:linear-gradient(to right,#9da8b1,#dddf68) */
+}
+.left-side{
+    text-align: right;
+    letter-spacing: 5px;
+}
+.bg .bar{
+    position: fixed;
+    top:-70px;
+    right:0px;
+    transform: rotate(-45deg);
+    width:31px;
+    height: 350px;
+    padding: 89px 9px;
+    color: #fff;
+    background: #3AA2FB;
+}
+
+.video{
+    display: block;
+    width: 100%;
+    max-height:100%;
+    height: 100vh;
+    object-fit:fill;
+}
+.input-group{
+    width:500px;
+    margin-left:50px;
+}
+ 
+.bg .footer{
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    padding: 15px;
+    text-align: center;
+    background: #f0f0f0;
+    color:rgba(0, 0, 0,.4);
+}
+
+.container {
+    float: left;
+    display: grid;
+    grid-template-columns: 100px 100px 100px 100px;
+    grid-template-rows: 100px 100px 100px;
+    grid-template-areas: 
+        "header header header r-right"
+        "main main sidebar sidebar"
+        "main main footer footer";
+    grid-column-gap: 8px;
+    grid-row-gap: 8px;
+    justify-content: center;  /* 将整个网格容器里的东西往中间移动，justify-aitems是相对与网格线的 */
+}
+.container img{
+    max-width: 100%;
+    max-height: 100%;
+}
+.item-a{
+    grid-area: header;
+    text-align: center;
+    background: #FA575C;
+    background: url('/iot1.jpg') no-repeat;
+}
+.item-b{
+    grid-area: r-right;
+    background: #FFFF00;
+    background: url('/iot2.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+.item-c{
+    grid-area: main;
+    background: #FFAD43;
+    background: url('/iot5.jpg');
+    background-size: 100% 100%;
+}
+.item-d{
+    grid-area: sidebar;
+    background:#3AA2FB; 
+    background: url('/iot3.jpg') no-repeat 100%/100%;
+}
+.item-e{
+    grid-area: footer;
+    background:#3AA2FB; 
+    background: url('/iot4.jpg') no-repeat 100%/100%;
+}
+
+@keyframes slider {
+    from{
+        transform: translate(-120%,-50%);
+    }
+    /* 20%{
+        transform: translate(-90%,-50%)
+    }
+    40%{
+        transform: translate(-80%,-50%)
+    }
+    60%{
+        transform: translate(-70%,-50%)
+    }
+    80%{
+        transform: translate(-60%,-50%)
+    } */
+    to{
+        transform: translate(-50%,-50%)
+    }
+}
+/* .register-box .ant-form-item-label > label{
+    color:#fff;
+} */
